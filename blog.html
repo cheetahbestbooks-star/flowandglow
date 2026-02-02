@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Sonia Catic - Conversion Copywriter Shopify & Klaviyo</title>
+    <meta name="description" content="Conseils et stratégies email marketing Klaviyo, copywriting e-commerce et conversion pour marques Beauty & Wellness. Par Sonia Catic, conversion copywriter.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1E3A5F;
+            --primary-light: #2D5A8A;
+            --accent: #E85D40;
+            --accent-hover: #D14D32;
+            --success: #10B981;
+            --bg: #FAFBFC;
+            --white: #FFFFFF;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --border: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        /* BLOG HERO */
+        .blog-hero {
+            padding: 60px 0;
+            background: linear-gradient(180deg, var(--white) 0%, var(--bg) 100%);
+            text-align: center;
+        }
+
+        .blog-hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .blog-hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* BLOG GRID */
+        .blog-section {
+            padding: 60px 0;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .blog-card:hover {
+            box-shadow: 0 20px 40px rgba(30, 58, 95, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .blog-card.featured {
+            grid-column: span 2;
+        }
+
+        .blog-card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .blog-card.featured .blog-card-image {
+            height: 280px;
+        }
+
+        .blog-card-content {
+            padding: 24px;
+        }
+
+        .blog-card-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #EEF2FF;
+            color: #4F46E5;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .blog-card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .blog-card.featured h2 {
+            font-size: 26px;
+        }
+
+        .blog-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .blog-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* CATEGORIES */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            background: var(--white);
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* NEWSLETTER */
+        .newsletter {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .newsletter-box {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-box h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .newsletter-box p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .newsletter-form button {
+            padding: 14px 28px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--accent-hover);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-card.featured {
+                grid-column: span 1;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Sonia Catic</a>
+            <nav class="nav">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#portfolio">Portfolio</a>
+                <a href="blog.html" class="active">Blog</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="mailto:contact@soniacatic.com" class="btn btn-primary">Discutons →</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- BLOG HERO -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>Le Blog Conversion</h1>
+            <p>Stratégies email marketing, copywriting e-commerce et conversion pour marques Beauty & Wellness qui veulent vendre plus.</p>
+        </div>
+    </section>
+
+    <!-- BLOG CONTENT -->
+    <section class="blog-section">
+        <div class="container">
+            <!-- CATEGORIES -->
+            <div class="categories">
+                <a href="#" class="category-btn active">Tous</a>
+                <a href="#" class="category-btn">Email Marketing</a>
+                <a href="#" class="category-btn">Shopify</a>
+                <a href="#" class="category-btn">Copywriting</a>
+                <a href="#" class="category-btn">Beauty & Wellness</a>
+            </div>
+
+            <!-- BLOG GRID -->
+            <div class="blog-grid">
+                <!-- FEATURED ARTICLE -->
+                <article class="blog-card featured">
+                    <a href="blog/klaviyo-flows-shopify-guide-complet.html" class="blog-card-link">
+                        <div class="blog-card-image">📧</div>
+                        <div class="blog-card-content">
+                            <span class="blog-card-category">Email Marketing</span>
+                            <h2>Les 7 Flows Klaviyo Indispensables pour Votre Boutique Shopify</h2>
+                            <p>Guide complet pour configurer les séquences email qui génèrent du revenu automatique. Welcome series, abandon panier, post-achat... tout ce qu'il faut savoir pour transformer Klaviyo en machine à vendre.</p>
+                            <div class="blog-card-meta">
+                                <span>📅 Février 2026</span>
+                                <span>⏱️ 12 min de lecture</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- ARTICLE 2 -->
+                <article class="blog-card">
+                    <a href="blog/emails-abandon-panier-convertir.html" class="blog-card-link">
+                        <div class="blog-card-image">🛒</div>
+                        <div class="blog-card-content">
+                            <span class="blog-card-category">Email Marketing</span>
+                            <h2>Emails Abandon Panier : Récupérez +30% de Ventes Perdues</h2>
+                            <p>La séquence exacte pour récupérer les paniers abandonnés. Timing, copywriting et exemples concrets.</p>
+                            <div class="blog-card-meta">
+                                <span>📅 Février 2026</span>
+                                <span>⏱️ 8 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- ARTICLE 3 -->
+                <article class="blog-card">
+                    <a href="blog/welcome-series-emails-ecommerce.html" class="blog-card-link">
+                        <div class="blog-card-image">👋</div>
+                        <div class="blog-card-content">
+                            <span class="blog-card-category">Email Marketing</span>
+                            <h2>Welcome Series : 5 Emails pour Transformer vos Abonnés en Clients</h2>
+                            <p>Structure, timing et copywriting pour une séquence de bienvenue qui convertit dès le premier email.</p>
+                            <div class="blog-card-meta">
+                                <span>📅 Février 2026</span>
+                                <span>⏱️ 10 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- ARTICLE 4 -->
+                <article class="blog-card">
+                    <a href="blog/copywriting-fiche-produit-shopify.html" class="blog-card-link">
+                        <div class="blog-card-image">📄</div>
+                        <div class="blog-card-content">
+                            <span class="blog-card-category">Shopify</span>
+                            <h2>Comment Optimiser vos Fiches Produits Shopify pour Plus de Ventes</h2>
+                            <p>Les éléments copy qui font la différence entre une page qui scroll et une page qui convertit.</p>
+                            <div class="blog-card-meta">
+                                <span>📅 Février 2026</span>
+                                <span>⏱️ 9 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- ARTICLE 5 -->
+                <article class="blog-card">
+                    <a href="blog/email-marketing-beaute-wellness.html" class="blog-card-link">
+                        <div class="blog-card-image">✨</div>
+                        <div class="blog-card-content">
+                            <span class="blog-card-category">Beauty & Wellness</span>
+                            <h2>Email Marketing Beauté : Les Stratégies Qui Fonctionnent</h2>
+                            <p>Comment parler à vos clientes beauté/wellness. Ton, sujets, fréquence et exemples de marques qui réussissent.</p>
+                            <div class="blog-card-meta">
+                                <span>📅 Février 2026</span>
+                                <span>⏱️ 7 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- ARTICLE 6 -->
+                <article class="blog-card">
+                    <a href="blog/post-purchase-sequence-fidélisation.html" class="blog-card-link">
+                        <div class="blog-card-image">💝</div>
+                        <div class="blog-card-content">
+                            <span class="blog-card-category">Email Marketing</span>
+                            <h2>Post-Purchase : Fidélisez et Faites Racheter vos Clientes</h2>
+                            <p>La séquence post-achat pour maximiser la Customer Lifetime Value et créer des clientes fidèles.</p>
+                            <div class="blog-card-meta">
+                                <span>📅 Février 2026</span>
+                                <span>⏱️ 8 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-box">
+                <h2>📬 La Newsletter Conversion</h2>
+                <p>Chaque semaine, un conseil copywriting actionnable pour vendre plus avec vos emails et vos pages. Rejoignez les marques beauty & wellness qui veulent convertir.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="votre@email.com" required>
+                    <button type="submit">S'inscrire</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Sonia Catic · Conversion Copywriter Shopify & Klaviyo · Suisse/France</p>
+        </div>
+    </footer>
+
+</body>
+</html>

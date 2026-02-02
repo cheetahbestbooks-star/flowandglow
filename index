@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopify x Klaviyo | Offres & Kits</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:#101826;
+      --card:#111b2b;
+      --line:#22324a;
+      --text:#eaf0ff;
+      --muted:#b7c2dd;
+      --gold:#d7b46a;
+      --rose:#ffced8;
+      --mint:#8fe0c6;
+      --warn:#ffcc66;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:radial-gradient(1200px 600px at 20% 10%, #14233a 0%, var(--bg) 55%);color:var(--text)}
+    a{color:inherit}
+    .wrap{max-width:1080px;margin:0 auto;padding:28px 18px 60px}
+    .top{
+      display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap
+    }
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.03);color:var(--muted);font-size:12px}
+    .dot{width:8px;height:8px;border-radius:99px;background:var(--gold);box-shadow:0 0 18px rgba(215,180,106,.35)}
+    h1{margin:10px 0 6px;font-size:28px;letter-spacing:.2px}
+    .sub{margin:0;color:var(--muted);max-width:72ch;line-height:1.4}
+
+    .tabs{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+    .tabbtn{
+      border:1px solid var(--line);background:rgba(255,255,255,.02);
+      color:var(--text);padding:10px 12px;border-radius:12px;cursor:pointer;
+      display:inline-flex;gap:10px;align-items:center;font-weight:600
+    }
+    .tabbtn[aria-selected="true"]{border-color:rgba(215,180,106,.75);box-shadow:0 0 0 2px rgba(215,180,106,.15) inset}
+    .tabico{width:10px;height:10px;border-radius:3px;background:var(--gold)}
+
+    .grid{margin-top:16px;display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .card{grid-column:span 12;background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid var(--line);border-radius:16px;padding:14px}
+    .card h2{margin:0 0 10px;font-size:16px}
+
+    .kpi{display:flex;gap:12px;flex-wrap:wrap}
+    .pill{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02);color:var(--muted);font-size:12px}
+    .pill strong{color:var(--text)}
+
+    .note{margin-top:10px;padding:10px 12px;border-radius:14px;border:1px solid rgba(215,180,106,.35);background:rgba(215,180,106,.08);color:var(--text);line-height:1.35}
+
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:14px;border:1px solid var(--line)}
+    th,td{padding:10px 10px;vertical-align:top}
+    th{background:rgba(255,255,255,.03);text-align:left;font-size:12px;color:var(--muted);letter-spacing:.3px}
+    td{border-top:1px solid var(--line);font-size:13px;line-height:1.35}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:11px;margin-right:6px;white-space:nowrap}
+    .tag.gold{border-color:rgba(215,180,106,.5);color:var(--gold)}
+    .tag.rose{border-color:rgba(255,206,216,.35);color:var(--rose)}
+    .tag.mint{border-color:rgba(143,224,198,.35);color:var(--mint)}
+
+    .two{grid-column:span 12}
+    @media (min-width:860px){
+      .two{grid-column:span 6}
+    }
+
+    .muted{color:var(--muted)}
+    .small{font-size:12px}
+    .hr{height:1px;background:var(--line);margin:12px 0}
+
+    .hide{display:none}
+
+    .footer{margin-top:18px;color:var(--muted);font-size:12px;line-height:1.35}
+    .btn{
+      display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);
+      background:rgba(255,255,255,.02);padding:9px 12px;border-radius:12px;
+      cursor:pointer;color:var(--text);font-weight:600
+    }
+    .btn:hover{border-color:rgba(215,180,106,.55)}
+    .copyok{margin-left:10px;color:var(--mint);font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="badge"><span class="dot"></span> Cosmetics DTC (FR/CH + anglophone) • Shopify + Klaviyo • Direct response clean (premium)</div>
+        <h1>Offres & Kits | Tableau de bord</h1>
+        <p class="sub">Une page pour piloter tes packs (côté client) et tes procédures (côté opérateur). Version prête à traduire EN ensuite.</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn" id="copyBtn" title="Copier le headline">Copier le headline</button>
+        <span id="copyState" class="copyok hide">Copié ✓</span>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h2>Définition rapide: « Pack/Offre » vs « Kit »</h2>
+      <div class="kpi">
+        <span class="pill"><strong>Offre / Pack</strong> = ce que tu vends (prix + scope + délai).</span>
+        <span class="pill"><strong>Kit</strong> = le module réutilisable que tu déploies (templates + checklist + flow).</span>
+      </div>
+      <div class="note">
+        Exemple: tu vends le pack <b>Klaviyo Glow Engine</b>. À l’intérieur, tu déploies des <b>kits</b>: Welcome (3 emails), Cart (3), Browse (2), Post-purchase (3), Winback (2), Review (1) + une bibliothèque de blocs (preuves/réassurance/FAQ).
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Vues">
+      <button class="tabbtn" role="tab" aria-selected="true" aria-controls="panel-you" id="tab-you"><span class="tabico"></span> Pour moi (procédure)</button>
+      <button class="tabbtn" role="tab" aria-selected="false" aria-controls="panel-client" id="tab-client"><span class="tabico" style="background:var(--rose)"></span> Pour le client (offres)</button>
+    </div>
+
+    <!-- PANEL: YOU -->
+    <section id="panel-you" role="tabpanel" aria-labelledby="tab-you">
+      <div class="grid">
+        <div class="card two">
+          <h2>Procédure opérationnelle (SOP) 1er client</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Étape</th>
+                <th>Objectif</th>
+                <th>Output</th>
+                <th>Temps cible</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tag gold">J0</span> Pré-qualif</td>
+                <td>Filtrer et cadrer</td>
+                <td>5 questions + accord scope</td>
+                <td>15 min</td>
+              </tr>
+              <tr>
+                <td><span class="tag gold">J0</span> Onboarding</td>
+                <td>Récupérer accès + assets</td>
+                <td>Accès, brand kit, preuves, top produits</td>
+                <td>45 min</td>
+              </tr>
+              <tr>
+                <td><span class="tag gold">J1</span> Audit rapide</td>
+                <td>Décider les priorités</td>
+                <td>Plan d’attaque 1 page</td>
+                <td>90 min</td>
+              </tr>
+              <tr>
+                <td><span class="tag gold">J2</span> Templates</td>
+                <td>Standardiser</td>
+                <td>1 template email + blocs réutilisables</td>
+                <td>2 h</td>
+              </tr>
+              <tr>
+                <td><span class="tag gold">J3–J7</span> Flows MVP</td>
+                <td>Créer la machine</td>
+                <td>Welcome + Cart + Post-purchase</td>
+                <td>1–2 j</td>
+              </tr>
+              <tr>
+                <td><span class="tag gold">J7–J10</span> Flows +</td>
+                <td>Compléter</td>
+                <td>Browse + Winback + Review</td>
+                <td>1 j</td>
+              </tr>
+              <tr>
+                <td><span class="tag gold">J10</span> QA</td>
+                <td>Éviter les bugs</td>
+                <td>Checklist liens, mobile, exclusions</td>
+                <td>30 min</td>
+              </tr>
+              <tr>
+                <td><span class="tag gold">J14</span> Optimisation</td>
+                <td>Améliorer vite</td>
+                <td>2 tests A/B + mini rapport</td>
+                <td>45 min</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="footer">Astuce: tu limites à <b>2 tests A/B</b> au début (objet + hero). Pas plus.</div>
+        </div>
+
+        <div class="card two">
+          <h2>Bibliothèque de blocs (Cosmetics premium)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Bloc</th>
+                <th>Rôle</th>
+                <th>Contenu</th>
+                <th>Où l’utiliser</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tag mint">Preuve</span></td>
+                <td>Confiance</td>
+                <td>Avis court + note + UGC</td>
+                <td>Welcome, Cart, Browse</td>
+              </tr>
+              <tr>
+                <td><span class="tag mint">Pour qui</span></td>
+                <td>Réduire l’hésitation</td>
+                <td>Parfait si / moins adapté si</td>
+                <td>PDP, Browse, Welcome</td>
+              </tr>
+              <tr>
+                <td><span class="tag mint">Texture</span></td>
+                <td>Désir</td>
+                <td>Fini, sensation, application</td>
+                <td>Welcome, Post-purchase</td>
+              </tr>
+              <tr>
+                <td><span class="tag mint">Réassurance</span></td>
+                <td>Lever les freins</td>
+                <td>Livraison, retours, paiement, SAV</td>
+                <td>Cart, Welcome, Footer</td>
+              </tr>
+              <tr>
+                <td><span class="tag mint">Mini FAQ</span></td>
+                <td>Objections</td>
+                <td>3 questions max, réponses clean</td>
+                <td>Cart #2, Welcome #3</td>
+              </tr>
+              <tr>
+                <td><span class="tag mint">How-to</span></td>
+                <td>Réachat</td>
+                <td>Routine + erreurs à éviter</td>
+                <td>Post-purchase</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="note small"><b>Claims safe cosmetics:</b> préfère « aide à », « améliore l’apparence de », « résultats variables selon la peau ». Évite « guérit/traite/résultats garantis ».</div>
+        </div>
+
+        <div class="card">
+          <h2>Checklist QA (avant d’activer un flow)</h2>
+          <div class="kpi">
+            <span class="pill">Mobile lisible</span>
+            <span class="pill">1 CTA principal</span>
+            <span class="pill">Liens OK</span>
+            <span class="pill">Exclusions acheteurs</span>
+            <span class="pill">Preuve ≥ 1</span>
+            <span class="pill">Réassurance visible</span>
+            <span class="pill">Ton premium</span>
+            <span class="pill">Pas de promesses risquées</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL: CLIENT -->
+    <section id="panel-client" role="tabpanel" aria-labelledby="tab-client" class="hide">
+      <div class="grid">
+        <div class="card">
+          <h2>Headline (à utiliser partout)</h2>
+          <div class="note" id="headline">Conversion Copywriter pour marques Cosmetics sur Shopify | Pages + Flows Klaviyo pour booster CVR & repeat purchase</div>
+        </div>
+
+        <div class="card">
+          <h2>Offres (packs) pour marques Cosmetics DTC</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Pack</th>
+                <th>Pour qui</th>
+                <th>Livrables</th>
+                <th>Délai</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Klaviyo Glow Engine</b><div class="muted small">Retention & réachat</div></td>
+                <td>Marque Shopify qui veut générer du revenu via email/SMS</td>
+                <td>
+                  <span class="tag gold">7 flows</span> Welcome, Cart, Browse, Post-purchase, Winback, Review, Cross-sell<br>
+                  <span class="tag rose">Templates</span> + bibliothèque de blocs + plan A/B
+                </td>
+                <td>10–14 jours</td>
+              </tr>
+              <tr>
+                <td><b>Shopify CRO Sprint</b><div class="muted small">Conversion sur site</div></td>
+                <td>Marque qui a du trafic mais CVR/AOV à optimiser</td>
+                <td>
+                  <span class="tag gold">1 PDP</span> structure + copy + preuves + FAQ<br>
+                  <span class="tag rose">Microcopy</span> livraison/retours/paiement + 10 hooks ads
+                </td>
+                <td>7–10 jours</td>
+              </tr>
+              <tr>
+                <td><b>Launch System</b><div class="muted small">Lancement propre</div></td>
+                <td>Pré-lancement ou lancement produit</td>
+                <td>
+                  <span class="tag gold">Landing</span> + <span class="tag gold">PDP</span><br>
+                  <span class="tag rose">Email</span> séquence lancement (5–7) + welcome
+                </td>
+                <td>14–21 jours</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="footer">Filtre premium conseillé: 20+ commandes/mois ou budget ads actif (ou lancement avec stock/UGC prêt).</div>
+        </div>
+
+        <div class="card two">
+          <h2>Ce que le client reçoit (détail du kit Glow Engine)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Kit (module)</th>
+                <th>Contenu</th>
+                <th>But</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Welcome Kit</b> <span class="tag gold">3 emails</span></td>
+                <td>Best-sellers + guide routine + objections</td>
+                <td>Convertir l’inscrit en acheteuse</td>
+              </tr>
+              <tr>
+                <td><b>Cart Kit</b> <span class="tag gold">3 emails</span></td>
+                <td>Rappel + preuve + FAQ + nudge soft</td>
+                <td>Récupérer des ventes</td>
+              </tr>
+              <tr>
+                <td><b>Browse Kit</b> <span class="tag gold">2 emails</span></td>
+                <td>“Vous regardiez…” + aide au choix</td>
+                <td>Transformer l’hésitation</td>
+              </tr>
+              <tr>
+                <td><b>Post-purchase Kit</b> <span class="tag gold">2–3 emails</span></td>
+                <td>How-to + attentes + cross-sell routine</td>
+                <td>Réachat + satisfaction</td>
+              </tr>
+              <tr>
+                <td><b>Review/UGC Kit</b> <span class="tag gold">1 email</span></td>
+                <td>Demande d’avis simple, friction minimale</td>
+                <td>Créer de la preuve sociale</td>
+              </tr>
+              <tr>
+                <td><b>Winback Kit</b> <span class="tag gold">2 emails</span></td>
+                <td>Best-of + nouveautés + offre soft</td>
+                <td>Réactiver les clientes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card two">
+          <h2>Ce dont j’ai besoin (pour livrer vite)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>À fournir</th>
+                <th>Exemples</th>
+                <th>Pourquoi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Brand kit</td>
+                <td>Logo, couleurs, ton, 2 emails existants (si dispo)</td>
+                <td>Rester premium, cohérent</td>
+              </tr>
+              <tr>
+                <td>Preuves</td>
+                <td>Avis, screenshots, UGC, presse</td>
+                <td>Confiance = conversion</td>
+              </tr>
+              <tr>
+                <td>Top produits</td>
+                <td>Top 5 + marges + contraintes promo</td>
+                <td>Prioriser ce qui paye</td>
+              </tr>
+              <tr>
+                <td>Règles SAV</td>
+                <td>Livraison, retours, garanties</td>
+                <td>Lever les objections</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="note small">Option EN: mêmes kits, mêmes structures. On adapte seulement le ton et les expressions (US/UK) sans “Frenchy”.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+    <div class="footer">
+      <b>Mode d’emploi GitHub:</b> colle ce fichier en <span class="muted">index.html</span> dans ton repo, active GitHub Pages, et tu as ta page dashboard.
+    </div>
+  </div>
+
+  <script>
+    const tabYou = document.getElementById('tab-you');
+    const tabClient = document.getElementById('tab-client');
+    const panelYou = document.getElementById('panel-you');
+    const panelClient = document.getElementById('panel-client');
+
+    function select(which){
+      const isYou = which === 'you';
+      tabYou.setAttribute('aria-selected', isYou ? 'true' : 'false');
+      tabClient.setAttribute('aria-selected', !isYou ? 'true' : 'false');
+      panelYou.classList.toggle('hide', !isYou);
+      panelClient.classList.toggle('hide', isYou);
+    }
+
+    tabYou.addEventListener('click', () => select('you'));
+    tabClient.addEventListener('click', () => select('client'));
+
+    // Copy headline
+    const copyBtn = document.getElementById('copyBtn');
+    const copyState = document.getElementById('copyState');
+    const headline = 'Conversion Copywriter pour marques Cosmetics sur Shopify | Pages + Flows Klaviyo pour booster CVR & repeat purchase';
+
+    copyBtn.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText(headline);
+        copyState.classList.remove('hide');
+        setTimeout(()=>copyState.classList.add('hide'), 1200);
+      }catch(e){
+        alert('Copie impossible (navigateur). Texte: ' + headline);
+      }
+    });
+  </script>
+</body>
+</html>

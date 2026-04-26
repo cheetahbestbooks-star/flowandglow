@@ -189,6 +189,8 @@
             background: var(--white);
             line-height: 1.6;
             overflow-x: hidden;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
 
         /* ============================================
@@ -860,7 +862,7 @@
         .pricing-card {
             background: white; border-radius: var(--radius-lg); padding: 36px;
             border: 2px solid var(--gray-100); transition: all 0.4s;
-            position: relative;
+            position: relative; isolation: isolate;
         }
         .pricing-card:hover {
             transform: translateY(-6px);
@@ -906,6 +908,11 @@
             padding: 8px 0; font-size: 0.9rem; color: var(--gray-700);
         }
         .pricing-features li i { color: var(--teal); flex-shrink: 0; margin-top: 2px; width: 18px; height: 18px; }
+
+        /* Collapsible pricing features on mobile */
+        .pricing-features .features-toggle {
+            display: none; /* hidden on desktop */
+        }
 
         /* Timeline */
         .timeline { margin-top: 48px; }
@@ -1331,13 +1338,22 @@
             .hero { padding: 100px 0 70px; min-height: auto; }
             .hero-content { text-align: center; }
             .hero-badge { justify-content: center; }
+            .hero-badge .badge { font-size: 0.7rem; padding: 5px 10px; text-align: center; line-height: 1.4; }
             .hero-stats { flex-direction: column; gap: 12px; align-items: center; }
             .hero-ctas { flex-direction: column; gap: 12px; }
             .hero-ctas .btn { width: 100%; justify-content: center; }
+            .hero-sub { font-size: 1rem; }
             .stacked-title { align-items: center; text-align: center; }
             .stacked-title .line-1 { font-size: clamp(1.6rem, 7vw, 2.4rem); }
             .stacked-title .line-2 { font-size: clamp(2rem, 9vw, 3rem); }
             .stacked-title .line-3 { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+            /* Prevent text overflow everywhere */
+            .badge { word-break: break-word; hyphens: auto; }
+            .section-subtitle { font-size: 0.95rem; }
+            h2.section-title { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+            .pme-hero-card h3 { font-size: 1.2rem; }
+            .pme-hero-card p { font-size: 0.88rem; }
 
             /* Trust bar */
             .trust-bar-inner { flex-direction: column; gap: 10px; align-items: center; }
@@ -1354,11 +1370,40 @@
 
             /* Pricing */
             .pricing-row { grid-template-columns: 1fr !important; }
-            .pricing-card { padding: 24px; }
+            .pricing-card { padding: 20px; }
+            .pricing-card h4 { font-size: 1.05rem; }
+            .pricing-card .price { font-size: 1.3rem; }
+            .pricing-features { margin: 16px 0; }
+            .pricing-features li { padding: 5px 0; font-size: 0.82rem; }
+            .pricing-features li i { width: 15px; height: 15px; }
+
+            /* Collapsible feature lists on mobile */
+            .pricing-features.collapsible li:nth-child(n+4) {
+                display: none;
+            }
+            .pricing-features.collapsible.expanded li:nth-child(n+4) {
+                display: flex;
+            }
+            .pricing-features .features-toggle {
+                display: flex !important; align-items: center; justify-content: center; gap: 6px;
+                width: 100%; padding: 8px 0; margin-top: 4px;
+                background: none; border: 1px dashed var(--gray-200); border-radius: 8px;
+                color: var(--blue); font-size: 0.78rem; font-weight: 600;
+                cursor: pointer; transition: all 0.3s;
+                font-family: inherit;
+            }
+            .pricing-features .features-toggle:hover { background: var(--blue-pale); border-color: var(--blue); }
+            .pricing-features .features-toggle i { width: 14px; height: 14px; transition: transform 0.3s; }
+            .pricing-features.expanded .features-toggle i { transform: rotate(180deg); }
+            .pricing-features.expanded .features-toggle .toggle-text::after { content: 'Réduire'; }
+            .pricing-features:not(.expanded) .features-toggle .toggle-text::after { content: 'Voir les ' attr(data-count) ' détails'; }
 
             /* Axes tabs */
-            .axes-tabs { flex-direction: column; align-items: stretch; }
-            .axe-tab { text-align: center; justify-content: center; }
+            .axes-tabs { flex-direction: column; align-items: stretch; gap: 8px; }
+            .axe-tab { text-align: center; justify-content: center; padding: 12px 16px; font-size: 0.88rem; }
+
+            /* Pricing badge no overflow */
+            .pricing-card-badge { font-size: 0.65rem; padding: 3px 12px; white-space: nowrap; }
 
             /* Method */
             .method-grid { grid-template-columns: 1fr !important; }
@@ -1388,6 +1433,14 @@
             /* Contact form */
             .lead-form-wrapper { padding: 24px 16px; }
             .form-row { grid-template-columns: 1fr !important; }
+            .lead-form-section .section-subtitle { font-size: 0.9rem; }
+
+            /* Value proposition boxes */
+            .pme-hero-card .badge { font-size: 0.68rem; line-height: 1.4; white-space: normal; }
+
+            /* Options bar fix overflow */
+            [style*="display:flex"][style*="gap:16px"][style*="border:1px dashed"] { font-size: 0.85rem; }
+            [style*="display:flex"][style*="gap:16px"][style*="border:1px dashed"] span { font-size: 0.8rem !important; }
 
             /* Footer */
             .footer-grid { grid-template-columns: 1fr !important; }
@@ -1447,6 +1500,125 @@
         }
         @media (max-width: 640px) {
             .mobile-sticky-bar { display: flex; }
+        }
+
+        /* ============================================
+           SCROLL PROGRESS BAR
+           ============================================ */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px; z-index: 1100;
+            background: linear-gradient(90deg, var(--coral), var(--blue), var(--teal));
+            width: 0%; transition: width 0.1s linear;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           TILT 3D on service cards & pricing cards
+           ============================================ */
+        .service-card, .pricing-card, .method-step, .result-card {
+            transform-style: preserve-3d; perspective: 800px;
+        }
+
+        /* ============================================
+           MAGNETIC BUTTON EFFECT
+           ============================================ */
+        .btn-primary, .btn-blue {
+            position: relative; overflow: hidden;
+        }
+        .btn-primary::before, .btn-blue::before {
+            content: ''; position: absolute;
+            width: 200%; height: 200%;
+            top: -50%; left: -200%;
+            background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+            transition: left 0.6s ease;
+            pointer-events: none;
+        }
+        .btn-primary:hover::before, .btn-blue:hover::before {
+            left: 100%;
+        }
+
+        /* ============================================
+           ANIMATED SECTION DIVIDER DOTS
+           ============================================ */
+        .section-dots {
+            display: flex; justify-content: center; gap: 8px;
+            padding: 8px 0; opacity: 0.3;
+        }
+        .section-dots span {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--coral); display: block;
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+        .section-dots span:nth-child(2) { animation-delay: 0.3s; background: var(--blue); }
+        .section-dots span:nth-child(3) { animation-delay: 0.6s; background: var(--teal); }
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.5); opacity: 1; }
+        }
+
+        /* ============================================
+           COUNTER ENTRANCE POP
+           ============================================ */
+        .counter-value {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .counter-value.counter-done {
+            animation: counterPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes counterPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* ============================================
+           SMOOTH CARD ENTRANCE (stagger improved)
+           ============================================ */
+        .stagger-children > * {
+            opacity: 0; transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .stagger-children.in-view > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+        .stagger-children.in-view > *:nth-child(2) { transition-delay: 0.12s; opacity: 1; transform: translateY(0); }
+        .stagger-children.in-view > *:nth-child(3) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
+        .stagger-children.in-view > *:nth-child(4) { transition-delay: 0.36s; opacity: 1; transform: translateY(0); }
+        .stagger-children.in-view > *:nth-child(5) { transition-delay: 0.48s; opacity: 1; transform: translateY(0); }
+        .stagger-children.in-view > *:nth-child(6) { transition-delay: 0.60s; opacity: 1; transform: translateY(0); }
+
+        /* ============================================
+           FLOATING LABEL on focus (form inputs)
+           ============================================ */
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--blue) !important;
+            box-shadow: 0 0 0 3px rgba(21,101,192,0.1) !important;
+            transform: translateY(-1px);
+        }
+
+        /* ============================================
+           GRADIENT BORDER PULSE on featured cards
+           ============================================ */
+        .pricing-card.featured::after {
+            content: ''; position: absolute; inset: -2px;
+            border-radius: inherit; z-index: -1;
+            background: linear-gradient(135deg, var(--coral), var(--gold), var(--coral));
+            background-size: 200% 200%;
+            animation: gradientPulse 3s ease infinite;
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .pricing-card.featured:hover::after { opacity: 1; }
+        @keyframes gradientPulse {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .scroll-progress { display: none; }
         }
 
         /* ============================================
@@ -1870,6 +2042,9 @@
     </style>
 </head>
 <body>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
     <!-- ============ HEADER ============ -->
     <header class="header" id="header">
@@ -3150,6 +3325,41 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
+        // ===== COLLAPSIBLE PRICING FEATURES (mobile) =====
+        function initCollapsibleFeatures() {
+            const isMobile = window.innerWidth <= 640;
+            document.querySelectorAll('.pricing-features').forEach(ul => {
+                const items = ul.querySelectorAll('li');
+                const existingToggle = ul.querySelector('.features-toggle');
+                if (items.length <= 3) {
+                    ul.classList.remove('collapsible');
+                    if (existingToggle) existingToggle.style.display = 'none';
+                    return;
+                }
+                if (isMobile) {
+                    ul.classList.add('collapsible');
+                    if (!existingToggle) {
+                        const hiddenCount = items.length - 3;
+                        const toggleBtn = document.createElement('button');
+                        toggleBtn.type = 'button';
+                        toggleBtn.className = 'features-toggle';
+                        toggleBtn.innerHTML = '<span class="toggle-text">Voir les ' + hiddenCount + ' détails</span> <i data-lucide="chevron-down"></i>';
+                        toggleBtn.addEventListener('click', function() {
+                            const expanded = ul.classList.toggle('expanded');
+                            this.querySelector('.toggle-text').textContent = expanded ? 'Réduire' : 'Voir les ' + hiddenCount + ' détails';
+                        });
+                        ul.appendChild(toggleBtn);
+                        lucide.createIcons({ nodes: [toggleBtn] });
+                    }
+                } else {
+                    ul.classList.remove('collapsible', 'expanded');
+                    if (existingToggle) existingToggle.style.display = 'none';
+                }
+            });
+        }
+        initCollapsibleFeatures();
+        window.addEventListener('resize', initCollapsibleFeatures);
+
         // ===== HEADER SCROLL =====
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
@@ -3444,6 +3654,74 @@
             const origAnimate = el._animated;
             el.addEventListener('animationend', () => el.classList.add('counter-done'));
         });
+
+        // ===== SCROLL PROGRESS BAR =====
+        const scrollProgressBar = document.getElementById('scrollProgress');
+        if (scrollProgressBar) {
+            window.addEventListener('scroll', () => {
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (window.scrollY / docHeight) * 100;
+                scrollProgressBar.style.width = progress + '%';
+            }, { passive: true });
+        }
+
+        // ===== TILT 3D EFFECT on cards (desktop only) =====
+        if (window.innerWidth > 968) {
+            document.querySelectorAll('.service-card, .pricing-card, .result-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -4;
+                    const rotateY = ((x - centerX) / centerX) * 4;
+                    card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-6px)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        }
+
+        // ===== STAGGER CHILDREN — IntersectionObserver =====
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.stagger-children').forEach(el => staggerObserver.observe(el));
+
+        // ===== MOUSE TRACKING — hero orbs follow cursor =====
+        const heroSection = document.getElementById('hero');
+        if (heroSection && window.innerWidth > 968) {
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                const particles = document.getElementById('heroParticles');
+                if (particles) {
+                    particles.style.transform = 'translate(' + (x * 20) + 'px, ' + (y * 15) + 'px)';
+                }
+            });
+        }
+
+        // ===== SMOOTH NUMBER DISPLAY on hero stats =====
+        document.querySelectorAll('.hero-stat-number').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(16px)';
+            el.style.transition = 'all 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+        });
+        setTimeout(() => {
+            document.querySelectorAll('.hero-stat-number').forEach((el, i) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, i * 200);
+            });
+        }, 800);
 
     </script>
 

@@ -327,16 +327,35 @@
 
         .mobile-menu {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--navy-deep); z-index: 999; flex-direction: column;
-            align-items: center; justify-content: center; gap: 28px;
+            background: linear-gradient(160deg, var(--navy-deep) 0%, #0a1628 100%);
+            z-index: 999; flex-direction: column;
+            align-items: center; justify-content: center; gap: 0;
+            opacity: 0; transition: opacity 0.3s ease;
         }
-        .mobile-menu.active { display: flex; }
-        .mobile-menu a {
-            color: white; text-decoration: none; font-size: 1.2rem; font-weight: 500;
+        .mobile-menu.active { display: flex; opacity: 1; }
+        .mobile-menu > a {
+            color: rgba(255,255,255,0.8); text-decoration: none;
+            font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px;
+            padding: 14px 0; transition: all 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            width: 70%; text-align: center;
+        }
+        .mobile-menu > a:last-of-type { border-bottom: none; }
+        .mobile-menu a:hover, .mobile-menu a:active { color: var(--coral); }
+        .mobile-menu .btn {
+            margin-top: 24px; font-family: 'Inter', sans-serif;
+            font-size: 1rem; text-transform: none; letter-spacing: 0;
+            padding: 16px 40px; border-radius: 50px;
+        }
+        .mobile-menu-footer {
+            position: absolute; bottom: 40px; display: flex; flex-direction: column;
+            gap: 10px; align-items: center; color: rgba(255,255,255,0.3); font-size: 0.75rem;
         }
         .mobile-close {
             position: absolute; top: 20px; right: 24px; background: none;
-            border: none; color: white; cursor: pointer;
+            border: none; color: white; cursor: pointer; z-index: 1001;
+            width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
         }
 
         /* ============================================
@@ -1263,29 +1282,171 @@
         /* ============================================
            RESPONSIVE
            ============================================ */
+        /* ============================================
+           RESPONSIVE — TABLETTE (max 968px)
+           ============================================ */
         @media (max-width: 968px) {
             .nav { display: none; }
             .mobile-toggle { display: block; }
+            .hero-logo { display: none; }
+            .scroll-indicator { display: none; }
             .hero-stats { gap: 24px; }
             .problems-grid { grid-template-columns: 1fr; gap: 32px; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
             .method-grid { grid-template-columns: repeat(2, 1fr); }
             .results-grid { grid-template-columns: repeat(2, 1fr); }
             .about-grid { grid-template-columns: 1fr; }
+            .about-image { margin-bottom: 32px; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+
+            /* Photo dans les hero cards PME/Ecom */
+            .pme-hero-card { flex-direction: column !important; }
+            .pme-hero-card .photo-frame { flex: 0 0 auto !important; width: 100% !important; height: 160px !important; }
+
+            /* Formulaire contact 1 colonne */
+            #contact .container > div { grid-template-columns: 1fr !important; }
+
+            /* Stacked titles plus petits */
+            .stacked-title .line-2 { font-size: clamp(2rem, 6vw, 3.5rem); }
+
+            /* Section déco réduit */
+            .section-decor { display: none; }
+        }
+
+        /* ============================================
+           RESPONSIVE — MOBILE (max 640px)
+           ============================================ */
+        @media (max-width: 640px) {
+            .container { padding: 0 16px; }
+            .section { padding: 56px 0; }
+
+            /* Header */
+            .header { padding: 12px 0; }
+            .header.scrolled { padding: 8px 0; }
+            .logo-img { height: 40px !important; }
+            .header.scrolled .logo-img { height: 32px !important; }
+
+            /* Hero */
+            .hero { padding: 100px 0 70px; min-height: auto; }
+            .hero-content { text-align: center; }
+            .hero-badge { justify-content: center; }
+            .hero-stats { flex-direction: column; gap: 12px; align-items: center; }
+            .hero-ctas { flex-direction: column; gap: 12px; }
+            .hero-ctas .btn { width: 100%; justify-content: center; }
+            .stacked-title { align-items: center; text-align: center; }
+            .stacked-title .line-1 { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+            .stacked-title .line-2 { font-size: clamp(2rem, 9vw, 3rem); }
+            .stacked-title .line-3 { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+            /* Trust bar */
+            .trust-bar-inner { flex-direction: column; gap: 10px; align-items: center; }
+            .trust-item { font-size: 0.8rem; padding: 10px 18px; width: 100%; justify-content: center; }
+
+            /* Logo carousel */
+            .logo-carousel { padding: 24px 0; }
+            .logo-item { height: 44px; padding: 4px 6px; }
+            .logo-item img { height: 32px; }
+
+            /* Services */
+            .services-grid { grid-template-columns: 1fr !important; }
+            .service-card { padding: 24px; }
+
+            /* Pricing */
+            .pricing-row { grid-template-columns: 1fr !important; }
+            .pricing-card { padding: 24px; }
+
+            /* Axes tabs */
+            .axes-tabs { flex-direction: column; align-items: stretch; }
+            .axe-tab { text-align: center; justify-content: center; }
+
+            /* Method */
+            .method-grid { grid-template-columns: 1fr !important; }
+
+            /* Results */
+            .results-grid { grid-template-columns: 1fr !important; }
+            .result-card { padding: 20px; }
+
+            /* Testimonials */
+            .testimonial-grid { grid-template-columns: 1fr; }
+
+            /* Resources */
+            #ressources .container > div:last-child { grid-template-columns: 1fr !important; }
+
+            /* About */
+            .about-grid { grid-template-columns: 1fr; }
+            .about-text .photo-frame { height: 90px !important; }
+
+            /* Photo frames dans problème */
+            .photo-frame-wrapper { flex: 0 0 100% !important; }
+            #probleme > .container > div:first-of-type { flex-direction: column !important; }
+
+            /* FAQ */
+            .faq-grid { margin: 32px auto 0; }
+            .faq-question { font-size: 0.9rem; padding: 16px; }
+
+            /* Contact form */
+            .lead-form-wrapper { padding: 24px 16px; }
+            .form-row { grid-template-columns: 1fr !important; }
+
+            /* Footer */
+            .footer-grid { grid-template-columns: 1fr !important; }
+            .footer-col { margin-bottom: 16px; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+
+            /* CTA section */
+            .cta-section { padding: 60px 0; }
+            .cta-buttons { flex-direction: column; gap: 12px; }
+            .cta-buttons .btn { width: 100%; justify-content: center; padding: 16px 24px !important; font-size: 0.95rem !important; }
+
+            /* Photos */
+            .photo-frame-wrapper { width: 100% !important; }
+            .photo-frame.frame-arch { height: 160px !important; }
+            .photo-frame.frame-diagonal { height: 140px !important; }
+
+            /* Floating CTA — remplacé par barre sticky mobile */
+            .floating-cta { display: none !important; }
+
+            /* Cookie banner au-dessus de la barre sticky */
+            .cookie-banner { bottom: 72px !important; }
+
+            /* Animations réduites pour perf mobile */
+            .reveal-left, .reveal-right { opacity: 0; transform: translateY(20px); }
+            .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: translateY(0); }
+
+            /* Wave dividers plus petits */
+            .wave-divider { height: 40px !important; }
+
+            /* Body padding pour la barre sticky */
+            body { padding-bottom: 72px; }
+        }
+
+        /* ============================================
+           BARRE STICKY MOBILE (appel + calendly)
+           ============================================ */
+        .mobile-sticky-bar {
+            display: none; position: fixed; bottom: 0; left: 0; right: 0;
+            z-index: 950; padding: 12px 16px;
+            background: rgba(15, 26, 46, 0.97);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+            gap: 10px;
+        }
+        .mobile-sticky-bar a {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            gap: 8px; padding: 12px 8px; border-radius: 10px;
+            font-size: 0.85rem; font-weight: 600; text-decoration: none;
+            transition: all 0.2s;
+        }
+        .mobile-sticky-bar .sticky-call {
+            background: white; color: var(--navy);
+        }
+        .mobile-sticky-bar .sticky-calendly {
+            background: var(--coral); color: white;
         }
         @media (max-width: 640px) {
-            .section { padding: 64px 0; }
-            .hero { padding: 120px 0 80px; min-height: auto; }
-            .hero-stats { flex-direction: column; gap: 16px; }
-            .hero-ctas { flex-direction: column; }
-            .hero-ctas .btn { width: 100%; justify-content: center; }
-            .method-grid { grid-template-columns: 1fr; }
-            .results-grid { grid-template-columns: 1fr; }
-            .pricing-row { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .axes-tabs { flex-direction: column; align-items: stretch; }
-            .footer-bottom { flex-direction: column; text-align: center; }
+            .mobile-sticky-bar { display: flex; }
         }
 
         /* ============================================
@@ -1706,10 +1867,6 @@
         }
         .cta-section .btn-primary { animation: ctaPulse 3s ease-in-out infinite; }
 
-        @media (max-width: 968px) {
-            .hero-logo { display: none; }
-            .scroll-indicator { display: none; }
-        }
     </style>
 </head>
 <body>
@@ -1743,6 +1900,16 @@
         <a href="#ressources" onclick="closeMobile()">Ressources</a>
         <a href="#a-propos" onclick="closeMobile()">À propos</a>
         <a href="#contact" class="btn btn-primary" onclick="closeMobile()">Audit Gratuit</a>
+        <div class="mobile-menu-footer">
+            <a href="tel:+41XXXXXXXXX" style="color:rgba(255,255,255,0.5);font-size:0.8rem;text-decoration:none;display:flex;align-items:center;gap:6px">
+                <i data-lucide="phone" style="width:14px;height:14px"></i>
+                +41 XX XXX XX XX
+            </a>
+            <a href="mailto:contact@ayke-solutions.com" style="color:rgba(255,255,255,0.5);font-size:0.8rem;text-decoration:none;display:flex;align-items:center;gap:6px">
+                <i data-lucide="mail" style="width:14px;height:14px"></i>
+                contact@ayke-solutions.com
+            </a>
+        </div>
     </div>
 
     <!-- ============ HERO ============ -->
@@ -3279,6 +3446,18 @@
         });
 
     </script>
+
+    <!-- ===== BARRE STICKY MOBILE ===== -->
+    <div class="mobile-sticky-bar" id="mobileStickyBar">
+        <a href="tel:+41XXXXXXXXX" class="sticky-call">
+            <i data-lucide="phone" style="width:18px;height:18px"></i>
+            Appeler
+        </a>
+        <a href="#contact" class="sticky-calendly">
+            <i data-lucide="calendar" style="width:18px;height:18px"></i>
+            Prendre RDV
+        </a>
+    </div>
 
     <!-- ===== TIDIO CHATBOT ===== -->
     <!-- Remplacez YOUR_TIDIO_KEY par votre clé Tidio (inscrivez-vous sur tidio.com) -->

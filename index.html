@@ -42,7 +42,7 @@
         "url": "https://ayke-solutions.com",
         "logo": "https://ayke-solutions.com/Logo%20avec%20Ayke%20Solutions%201254x1254%20PNG.png",
         "image": "https://ayke-solutions.com/Logo%20avec%20Ayke%20Solutions%201672x941%20PNG.png",
-        "telephone": "+41787777978",
+        "telephone": "",
         "email": "contact@ayke-solutions.com",
         "founder": {
             "@type": "Person",
@@ -181,7 +181,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html { scroll-behavior: smooth; font-size: 16px; }
+        html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -1293,6 +1293,13 @@
            RESPONSIVE — TABLETTE (max 968px)
            ============================================ */
         @media (max-width: 968px) {
+            /* === ANTI-OVERFLOW HORIZONTAL === */
+            html, body { overflow-x: hidden !important; max-width: 100vw; }
+            .section, section, .hero, .cta-section, footer { overflow: hidden !important; }
+            .hero::before, .hero::after { display: none; }
+            .section-decor { display: none !important; }
+            .floating-orb { display: none; }
+
             .nav { display: none; }
             .mobile-toggle { display: block; }
             .hero-logo { display: none; }
@@ -1449,6 +1456,9 @@
 
             /* CTA section */
             .cta-section { padding: 60px 0; }
+            .cta-section .stacked-title .line-1 { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+            .cta-section .stacked-title .line-2 { font-size: clamp(1.6rem, 7vw, 2.6rem); }
+            .cta-section p { font-size: 0.9rem !important; }
             .cta-buttons { flex-direction: column; gap: 12px; }
             .cta-buttons .btn { width: 100%; justify-content: center; padding: 16px 24px !important; font-size: 0.95rem !important; }
 
@@ -1460,12 +1470,82 @@
             /* Floating CTA — remplacé par barre sticky mobile */
             .floating-cta { display: none !important; }
 
+            /* Popup exit — adapté mobile */
+            .popup-overlay { padding: 16px; align-items: flex-end; }
+            .popup {
+                padding: 28px 20px; border-radius: 20px 20px 0 0;
+                max-width: 100%; animation: popupSlideUp 0.35s ease;
+            }
+            @keyframes popupSlideUp {
+                from { opacity: 0; transform: translateY(100%); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .popup-icon { width: 44px; height: 44px; margin-bottom: 12px; }
+            .popup-icon i { width: 22px !important; height: 22px !important; }
+            .popup h3 { font-size: 1.1rem; margin-bottom: 6px; }
+            .popup p { font-size: 0.82rem; margin-bottom: 16px; }
+            .popup .form-group input, .popup .form-group select {
+                padding: 12px 14px !important; font-size: 0.88rem !important;
+            }
+            .popup .btn { width: 100%; justify-content: center; padding: 14px !important; font-size: 0.9rem !important; }
+            .popup .form-privacy { font-size: 0.7rem; }
+            .popup-close { top: 10px; right: 10px; }
+
             /* Cookie banner au-dessus de la barre sticky */
             .cookie-banner { bottom: 72px !important; }
 
-            /* Animations réduites pour perf mobile */
-            .reveal-left, .reveal-right { opacity: 0; transform: translateY(20px); }
-            .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: translateY(0); }
+            /* Animations adaptées mobile — smooth et performantes */
+            .reveal-left, .reveal-right { opacity: 0; transform: translateY(24px); }
+            .reveal-left.visible, .reveal-right.visible {
+                opacity: 1; transform: translateY(0);
+                transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+            .reveal { transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important; }
+
+            /* Touch feedback — active state sur boutons */
+            .btn:active { transform: scale(0.96) !important; transition: transform 0.1s !important; }
+            .service-card:active, .pricing-card:active, .result-card:active {
+                transform: scale(0.98) !important; transition: transform 0.15s !important;
+            }
+            .faq-question:active { background: var(--gray-100) !important; }
+
+            /* Slide-up entrée hero — séquentielle */
+            .hero-badge, .hero .stacked-title, .hero-sub, .hero-ctas, .hero-stats {
+                animation: mobileSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+            }
+            .hero .stacked-title { animation-delay: 0.1s; }
+            .hero-sub { animation-delay: 0.2s; }
+            .hero-ctas { animation-delay: 0.3s; }
+            .hero-stats { animation-delay: 0.5s; }
+            @keyframes mobileSlideUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            /* Section labels — slide in from left */
+            .section-label {
+                animation: mobileLabelSlide 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+            }
+            @keyframes mobileLabelSlide {
+                from { opacity: 0; transform: translateX(-20px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+
+            /* Swipe hint on logo carousel */
+            .logo-carousel::after {
+                content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 40px;
+                background: linear-gradient(to left, white, transparent);
+                pointer-events: none; z-index: 2;
+            }
+
+            /* Smooth sticky bar entrance */
+            .mobile-sticky-bar {
+                animation: stickyBarIn 0.5s 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+            }
+            @keyframes stickyBarIn {
+                from { transform: translateY(100%); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
 
             /* Wave dividers plus petits */
             .wave-divider { height: 40px !important; }
@@ -2076,10 +2156,6 @@
         <a href="#a-propos" onclick="closeMobile()">À propos</a>
         <a href="#contact" class="btn btn-primary" onclick="closeMobile()">Audit Gratuit</a>
         <div class="mobile-menu-footer">
-            <a href="tel:+41XXXXXXXXX" style="color:rgba(255,255,255,0.5);font-size:0.8rem;text-decoration:none;display:flex;align-items:center;gap:6px">
-                <i data-lucide="phone" style="width:14px;height:14px"></i>
-                +41 XX XXX XX XX
-            </a>
             <a href="mailto:contact@ayke-solutions.com" style="color:rgba(255,255,255,0.5);font-size:0.8rem;text-decoration:none;display:flex;align-items:center;gap:6px">
                 <i data-lucide="mail" style="width:14px;height:14px"></i>
                 contact@ayke-solutions.com
@@ -2112,6 +2188,11 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge">
+                    <span class="badge badge-white">
+                        <i data-lucide="zap" style="width:14px;height:14px"></i>
+                        Disponible pour 2 nouveaux projets / mois
+                    </span>
+                </div>
                 <div class="stacked-title" style="margin-bottom:24px">
                     <span class="line-1 text-white" style="opacity:0.7">Transformez</span>
                     <span class="line-2 text-gradient">votre digital</span>
@@ -2884,9 +2965,6 @@
                         <a href="mailto:contact@ayke-solutions.com" style="width:36px;height:36px;border-radius:50%;background:var(--coral-glow);display:flex;align-items:center;justify-content:center;color:var(--coral);text-decoration:none;transition:all 0.3s">
                             <i data-lucide="mail" style="width:16px;height:16px"></i>
                         </a>
-                        <a href="tel:+41787777978" style="width:36px;height:36px;border-radius:50%;background:var(--teal-glow);display:flex;align-items:center;justify-content:center;color:var(--teal);text-decoration:none;transition:all 0.3s">
-                            <i data-lucide="phone" style="width:16px;height:16px"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="about-text reveal">
@@ -3194,7 +3272,8 @@
             <div class="stacked-title center">
                 <span class="line-1 text-white" style="opacity:0.6">Chaque jour sans</span>
                 <span class="line-2 text-gradient">présence digitale</span>
-                <span class="line-1 text-white">c'est du CA <span class="text-outline-white" style="font-size:inherit">en moins.</span></span>
+                <span class="line-1 text-white">c'est du <span class="text-gold" style="font-size:inherit">chiffre d'affaires</span></span>
+                <span class="line-2 text-gradient">en moins.</span>
             </div>
             <p style="font-size:1.15rem">Commencez par un appel découverte gratuit de 15 minutes. Zéro engagement, 100% actionnable.</p>
             <div class="cta-buttons">
@@ -3250,7 +3329,6 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <a href="mailto:contact@ayke-solutions.com">contact@ayke-solutions.com</a>
-                    <a href="tel:+41787777978">+41 (0)78 777 79 78</a>
                     <a href="#contact">Formulaire de contact</a>
                     <a href="https://calendly.com/ayke-iaworld/30min" target="_blank" rel="noopener">Réserver un appel</a>
                 </div>
@@ -3718,13 +3796,64 @@
             });
         }, 800);
 
+        // ===== MOBILE: Auto-hide header on scroll down, show on scroll up =====
+        if (window.innerWidth <= 968) {
+            let lastScrollY = 0;
+            let ticking = false;
+            const headerEl = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const currentScrollY = window.scrollY;
+                        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                            // Scrolling down — hide header
+                            headerEl.style.transform = 'translateY(-100%)';
+                            headerEl.style.transition = 'transform 0.3s ease';
+                        } else {
+                            // Scrolling up — show header
+                            headerEl.style.transform = 'translateY(0)';
+                        }
+                        lastScrollY = currentScrollY;
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+        }
+
+        // ===== MOBILE: Reveal sections with subtle scale =====
+        if (window.innerWidth <= 968) {
+            const mobileRevealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0) scale(1)';
+                    }
+                });
+            }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+            document.querySelectorAll('.service-card, .pricing-card, .result-card, .method-step, .faq-item, .testimonial-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px) scale(0.97)';
+                el.style.transition = 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+                mobileRevealObserver.observe(el);
+            });
+
+            // Stagger delay for grid items
+            document.querySelectorAll('.services-grid, .pricing-row, .results-grid, .method-grid').forEach(grid => {
+                Array.from(grid.children).forEach((child, i) => {
+                    child.style.transitionDelay = (i * 0.08) + 's';
+                });
+            });
+        }
+
     </script>
 
     <!-- ===== BARRE STICKY MOBILE ===== -->
     <div class="mobile-sticky-bar" id="mobileStickyBar">
-        <a href="tel:+41XXXXXXXXX" class="sticky-call">
-            <i data-lucide="phone" style="width:18px;height:18px"></i>
-            Appeler
+        <a href="mailto:contact@ayke-solutions.com" class="sticky-call">
+            <i data-lucide="mail" style="width:18px;height:18px"></i>
+            Email
         </a>
         <a href="#contact" class="sticky-calendly">
             <i data-lucide="calendar" style="width:18px;height:18px"></i>

@@ -1503,6 +1503,13 @@
             .about-photo-wrapper { max-width: 200px; margin: 0 auto; }
             .about-badges { gap: 6px; }
             .about-badges .badge { font-size: 0.7rem; padding: 4px 10px; }
+
+            /* Pricing hero cards — prevent text cutoff */
+            .pme-hero-card { flex-direction: column !important; padding: 20px !important; }
+            .pme-hero-card > div:first-child { min-width: 0 !important; width: 100% !important; }
+            .pme-hero-card h3 { font-size: 1.15rem !important; line-height: 1.35 !important; word-wrap: break-word; overflow-wrap: break-word; }
+            .pme-hero-card p { font-size: 0.85rem !important; line-height: 1.5 !important; }
+            .pme-hero-card .photo-frame { flex: 0 0 auto !important; width: 100% !important; height: 140px !important; }
             /* Footer */
             .footer-grid { grid-template-columns: 1fr !important; }
             .footer-col { margin-bottom: 16px; }
@@ -2173,6 +2180,21 @@
         }
         .cta-section .btn-primary { animation: ctaPulse 3s ease-in-out infinite; }
 
+
+        /* === MOBILE OVERFLOW NUCLEAR CATCH-ALL === */
+        @media (max-width: 968px) {
+            *::before, *::after {
+                max-width: 100vw !important;
+            }
+            .hero::before, .hero::after,
+            .about::before, .about::after,
+            .cta-section::before, .cta-section::after,
+            section::before, section::after {
+                display: none !important;
+            }
+            .stacked-title { overflow: hidden; }
+            .stacked-title .line-2 { word-break: break-word; }
+        }
     </style>
 </head>
 <body>
@@ -2242,12 +2264,7 @@
         </div>
         <div class="container">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="badge badge-white">
-                        <i data-lucide="zap" style="width:14px;height:14px"></i>
-                        Disponible pour 2 nouveaux projets / mois
-                    </span>
-                </div>
+
                 <div class="stacked-title" style="margin-bottom:24px">
                     <span class="line-1 text-white" style="opacity:0.7">Transformez</span>
                     <span class="line-2 text-gradient">votre digital</span>
@@ -2290,30 +2307,7 @@
         </div>
     </section>
 
-    <!-- Wave divider hero → trust -->
-    <svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none" style="display:block;width:100%;height:60px;margin-top:-1px"><path fill="#ffffff" d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z"></path></svg>
 
-    <!-- ============ TRUST BAR ============ -->
-    <div class="trust-bar" style="background:linear-gradient(90deg, var(--off-white) 0%, white 50%, var(--off-white) 100%);padding:48px 0;border-bottom:none">
-        <div class="container trust-bar-inner">
-            <div class="trust-item">
-                <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--teal-glow),var(--teal-pale));display:flex;align-items:center;justify-content:center"><i data-lucide="shield-check" style="width:16px;height:16px;color:var(--teal)"></i></span>
-                Ancrage romand · 10 ans en Suisse
-            </div>
-            <div class="trust-item">
-                <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--blue-glow),var(--blue-pale));display:flex;align-items:center;justify-content:center"><i data-lucide="briefcase" style="width:16px;height:16px;color:var(--blue)"></i></span>
-                Industrie · ERP · E-commerce
-            </div>
-            <div class="trust-item">
-                <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--coral-glow),var(--coral-pale));display:flex;align-items:center;justify-content:center"><i data-lucide="target" style="width:16px;height:16px;color:var(--coral)"></i></span>
-                ROI mesurable · Leads qualifiés
-            </div>
-            <div class="trust-item">
-                <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold-glow),rgba(245,197,66,0.1));display:flex;align-items:center;justify-content:center"><i data-lucide="clock" style="width:16px;height:16px;color:var(--gold)"></i></span>
-                Go-live en 14 jours
-            </div>
-        </div>
-    </div>
 
     <!-- ============ LOGO CAROUSEL — Clients & Expériences ============ -->
     <div class="logo-carousel">
@@ -3039,8 +3033,8 @@
                         </span>
                     </div>
                     <div style="margin-top:16px;display:flex;gap:10px;justify-content:center">
-                        <a href="https://www.linkedin.com/in/ayke-solutions-i-marketing-digital-i-automatisation-ia-055084390/" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:50%;background:var(--blue-glow);display:flex;align-items:center;justify-content:center;color:var(--blue);text-decoration:none;transition:all 0.3s">
-                            <i data-lucide="linkedin" style="width:16px;height:16px"></i>
+                        <a href="https://www.linkedin.com/in/ayke-solutions-i-marketing-digital-i-automatisation-ia-055084390/" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:50%;background:var(--blue-glow);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 0.3s">
+                            <img src="linkedin.png" alt="LinkedIn" style="width:18px;height:18px;object-fit:contain">
                         </a>
                         <a href="mailto:contact@ayke-solutions.com" style="width:36px;height:36px;border-radius:50%;background:var(--coral-glow);display:flex;align-items:center;justify-content:center;color:var(--coral);text-decoration:none;transition:all 0.3s">
                             <i data-lucide="mail" style="width:16px;height:16px"></i>
@@ -3244,7 +3238,7 @@
                                 Plan d'action concret à la clé
                             </div>
                         </div>
-                        <a href="https://calendly.com/ayke-iaworld/30min" target="_blank" class="btn btn-primary btn-lg" rel="noopener" style="width:100%;justify-content:center;font-size:1rem">
+                        <a href="https://calendly.com/ayke-solutions/30min" target="_blank" class="btn btn-primary btn-lg" rel="noopener" style="width:100%;justify-content:center;font-size:1rem">
                             <i data-lucide="calendar" style="width:18px;height:18px"></i>
                             Choisir un créneau
                         </a>
@@ -3378,16 +3372,16 @@
                     <p>Marketing digital & acquisition de leads pour PME locales et marques e-commerce. France & Suisse romande.</p>
                     <div class="footer-social">
                         <a href="https://www.linkedin.com/in/ayke-solutions-i-marketing-digital-i-automatisation-ia-055084390/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                            <i data-lucide="linkedin" style="width:16px;height:16px"></i>
-                        </a>
-                        <a href="https://instagram.com/ayke.solutions" target="_blank" rel="noopener" aria-label="Instagram">
-                            <i data-lucide="instagram" style="width:16px;height:16px"></i>
+                            <img src="linkedin.png" alt="LinkedIn" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
                         </a>
                         <a href="https://facebook.com/aykesolutions" target="_blank" rel="noopener" aria-label="Facebook">
-                            <i data-lucide="facebook" style="width:16px;height:16px"></i>
+                            <img src="facebook.png" alt="Facebook" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
+                        </a>
+                        <a href="https://instagram.com/ayke.solutions" target="_blank" rel="noopener" aria-label="Instagram">
+                            <img src="instagram.png" alt="Instagram" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
                         </a>
                         <a href="https://tiktok.com/@ayke.solutions" target="_blank" rel="noopener" aria-label="TikTok">
-                            <svg style="width:16px;height:16px" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V9.11a8.16 8.16 0 003.76.92V6.69z"/></svg>
+                            <img src="tiktok.png" alt="TikTok" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
                         </a>
                     </div>
                 </div>
@@ -3410,7 +3404,7 @@
                     <h4>Contact</h4>
                     <a href="mailto:contact@ayke-solutions.com">contact@ayke-solutions.com</a>
                     <a href="#contact">Formulaire de contact</a>
-                    <a href="https://calendly.com/ayke-iaworld/30min" target="_blank" rel="noopener">Réserver un appel</a>
+                    <a href="https://calendly.com/ayke-solutions/30min" target="_blank" rel="noopener">Réserver un appel</a>
                 </div>
             </div>
             <div class="footer-bottom">

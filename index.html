@@ -2157,6 +2157,7 @@
         .cta-section .btn-primary { animation: ctaPulse 3s ease-in-out infinite; }
 
     </style>
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
 <body>
 
@@ -2241,7 +2242,7 @@
                     Je rends votre offre visible, crédible et contactable — là où vos clients vous cherchent.
                 </p>
                 <div class="hero-ctas">
-                    <a href="#contact" class="btn btn-primary btn-lg">
+                    <a href="#" onclick="openCalendly(event)" class="btn btn-primary btn-lg">
                         <i data-lucide="calendar" style="width:18px;height:18px"></i>
                         Réserver un appel découverte
                     </a>
@@ -3180,44 +3181,11 @@
             <p class="section-subtitle" style="margin:0 auto 32px">Réservez votre appel découverte gratuit ou envoyez-moi un message — je vous réponds sous 24h.</p>
 
             <!-- 2 colonnes : Calendly + Formulaire -->
-            <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:32px;text-align:left;max-width:900px;margin:0 auto">
+            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:32px;text-align:left;max-width:960px;margin:0 auto">
 
-                <!-- Colonne gauche : Calendly + avantages -->
-                <div class="reveal-left" style="display:flex;flex-direction:column;gap:20px">
-                    <div style="background:linear-gradient(135deg,var(--navy) 0%,#1a3a5c 100%);border-radius:var(--radius-md);padding:32px;color:white">
-                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
-                            <div style="width:48px;height:48px;border-radius:50%;background:rgba(232,132,92,0.2);display:flex;align-items:center;justify-content:center">
-                                <i data-lucide="calendar" style="width:22px;height:22px;color:var(--coral)"></i>
-                            </div>
-                            <div>
-                                <div style="font-weight:700;font-size:1.05rem">Appel découverte</div>
-                                <div style="font-size:0.8rem;opacity:0.7">15 min · Gratuit · Sans engagement</div>
-                            </div>
-                        </div>
-                        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
-                            <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem">
-                                <i data-lucide="check-circle" style="width:16px;height:16px;color:var(--teal);flex-shrink:0"></i>
-                                Analyse rapide de votre situation
-                            </div>
-                            <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem">
-                                <i data-lucide="check-circle" style="width:16px;height:16px;color:var(--teal);flex-shrink:0"></i>
-                                Recommandations personnalisées
-                            </div>
-                            <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem">
-                                <i data-lucide="check-circle" style="width:16px;height:16px;color:var(--teal);flex-shrink:0"></i>
-                                Plan d'action concret à la clé
-                            </div>
-                        </div>
-                        <a href="https://calendly.com/ayke-iaworld/30min" target="_blank" class="btn btn-primary btn-lg" rel="noopener" style="width:100%;justify-content:center;font-size:1rem">
-                            <i data-lucide="calendar" style="width:18px;height:18px"></i>
-                            Choisir un créneau
-                        </a>
-                    </div>
-
-                    <!-- Photo contact -->
-                    <div class="photo-frame frame-asymmetric" style="height:140px">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=250&fit=crop&crop=center" alt="Échange et accompagnement personnalisé">
-                    </div>
+                <!-- Colonne gauche : Calendly widget intégré -->
+                <div class="reveal-left" style="display:flex;flex-direction:column;gap:0">
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/ayke-solutions/30min?hide_gdpr_banner=1&primary_color=e8845c" style="min-width:300px;height:580px;border-radius:var(--radius-md);overflow:hidden"></div>
                 </div>
 
                 <!-- Colonne droite : Formulaire -->
@@ -3321,7 +3289,7 @@
             </div>
             <p style="font-size:1.15rem">Commencez par un appel découverte gratuit de 15 minutes. Zéro engagement, 100% actionnable.</p>
             <div class="cta-buttons">
-                <a href="#contact" class="btn btn-primary btn-lg pulse-ring" style="font-size:1.1rem;padding:20px 40px">
+                <a href="#" onclick="openCalendly(event)" class="btn btn-primary btn-lg pulse-ring" style="font-size:1.1rem;padding:20px 40px">
                     <i data-lucide="phone" style="width:20px;height:20px"></i>
                     Réserver mon appel gratuit
                 </a>
@@ -3374,7 +3342,7 @@
                     <h4>Contact</h4>
                     <a href="mailto:contact@ayke-solutions.com">contact@ayke-solutions.com</a>
                     <a href="#contact">Formulaire de contact</a>
-                    <a href="https://calendly.com/ayke-iaworld/30min" target="_blank" rel="noopener">Réserver un appel</a>
+                    <a href="#" onclick="openCalendly(event)">Réserver un appel</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -3917,7 +3885,7 @@
             <i data-lucide="mail" style="width:18px;height:18px"></i>
             Email
         </a>
-        <a href="#contact" class="sticky-calendly">
+        <a href="#" onclick="openCalendly(event)" class="sticky-calendly">
             <i data-lucide="calendar" style="width:18px;height:18px"></i>
             Prendre RDV
         </a>
@@ -3927,5 +3895,21 @@
     <!-- Remplacez YOUR_TIDIO_KEY par votre clé Tidio (inscrivez-vous sur tidio.com) -->
     <script src="//code.tidio.co/YOUR_TIDIO_KEY.js" async></script>
 
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+    <script>
+    // Calendly popup function
+    function openCalendly(e) {
+        if (e) e.preventDefault();
+        if (typeof Calendly !== 'undefined') {
+            Calendly.initPopupWidget({
+                url: 'https://calendly.com/ayke-solutions/30min?hide_gdpr_banner=1&primary_color=e8845c'
+            });
+        } else {
+            window.open('https://calendly.com/ayke-solutions/30min', '_blank');
+        }
+        return false;
+    }
+    </script>
 </body>
 </html>

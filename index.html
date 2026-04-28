@@ -55,8 +55,8 @@
         ],
         "serviceType": ["Marketing Digital", "SEO Local", "Google Ads", "Email Marketing Klaviyo", "Automatisation IA", "Acquisition de Leads"],
         "knowsLanguage": ["fr", "en"],
-        "priceRange": "Sur devis",
-        "sameAs": ["https://linkedin.com/in/ayke-solutions"]
+        "priceRange": "$$",
+        "sameAs": ["https://www.linkedin.com/in/ayke-solutions-i-marketing-digital-i-automatisation-ia-055084390/"]
     }
     </script>
 
@@ -1033,6 +1033,25 @@
         }
         .testimonial-grid::-webkit-scrollbar { display: none; }
         .testimonial-grid:active { cursor: grabbing; }
+        /* Testimonial navigation buttons */
+        .testimonial-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 44px; height: 44px; border-radius: 50%;
+            background: white; border: 1px solid var(--gray-200);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 10; transition: all 0.3s;
+            color: var(--navy);
+        }
+        .testimonial-nav:hover { background: var(--navy); color: white; box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        .testimonial-prev { left: -22px; }
+        .testimonial-next { right: -22px; }
+        @media (max-width: 640px) {
+            .testimonial-prev { left: 4px; }
+            .testimonial-next { right: 4px; }
+            .testimonial-nav { width: 36px; height: 36px; opacity: 0.9; }
+        }
+
         .testimonial-card {
             background: white; border-radius: var(--radius-lg); padding: 32px;
             border: 1px solid var(--gray-100); position: relative;
@@ -1621,6 +1640,10 @@
         .mobile-sticky-bar .sticky-calendly {
             background: var(--coral); color: white;
         }
+        .mobile-sticky-bar a {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            text-align: center;
+        }
         @media (max-width: 640px) {
             .mobile-sticky-bar { display: flex; }
         }
@@ -2162,6 +2185,69 @@
         }
         .cta-section .btn-primary { animation: ctaPulse 3s ease-in-out infinite; }
 
+        /* MOBILE HERO CARDS — prevent text cutoff */
+        @media (max-width: 640px) {
+            .pme-hero-card {
+                flex-direction: column !important;
+                padding: 20px 16px !important;
+                gap: 16px !important;
+            }
+            .pme-hero-card > div:first-child {
+                min-width: 0 !important;
+                width: 100% !important;
+                flex: 1 1 auto !important;
+            }
+            .pme-hero-card .badge {
+                font-size: 0.63rem !important;
+                white-space: normal !important;
+                word-break: break-word !important;
+                line-height: 1.5 !important;
+                display: inline-flex !important;
+                flex-wrap: wrap !important;
+            }
+            .pme-hero-card h3 {
+                font-size: 1.05rem !important;
+                line-height: 1.35 !important;
+                word-break: break-word !important;
+            }
+            .pme-hero-card p {
+                font-size: 0.82rem !important;
+                line-height: 1.6 !important;
+            }
+            .pme-hero-card .photo-frame {
+                width: 100% !important;
+                height: 140px !important;
+                flex: 0 0 auto !important;
+            }
+            .axe-content { padding: 0 !important; margin: 0 !important; }
+            .axe-content > div[style*="padding:20px 28px"] {
+                padding: 14px 12px !important;
+                flex-direction: column !important;
+            }
+            .pricing-row { gap: 16px !important; }
+            .pricing-card { padding: 18px 14px !important; }
+            .pricing-card h4 { font-size: 0.95rem !important; }
+            .pricing-card .price-note { font-size: 0.72rem !important; }
+            .pricing-card-badge { font-size: 0.6rem !important; padding: 2px 10px !important; }
+            .service-card { padding: 18px 14px !important; }
+            .service-card h4 { font-size: 0.93rem !important; }
+            .service-card p { font-size: 0.82rem !important; }
+            
+            /* Sticky bar — center icons + text */
+            .mobile-sticky-bar {
+                padding: 8px 12px !important;
+            }
+            .mobile-sticky-bar a {
+                flex: 1 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 6px !important;
+                text-align: center !important;
+                font-size: 0.82rem !important;
+            }
+        }
+
     </style>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 
@@ -2501,7 +2587,7 @@
                 <div class="pricing-row">
                     <div class="pricing-card reveal">
                         <h4>Audit & Diagnostic digital</h4>
-                        <div class="price">Sur devis</div>
+                        <div class="price">&nbsp;</div>
                         <p class="price-note">Livré en 7-10 jours · Point d'entrée recommandé</p>
                         <ul class="pricing-features">
                             <li><i data-lucide="check"></i> Analyse présence digitale complète</li>
@@ -2515,7 +2601,7 @@
                     <div class="pricing-card featured reveal">
                         <div class="pricing-card-badge">Le plus populaire</div>
                         <h4>Package Lancement · 3 mois</h4>
-                        <div class="price">Sur devis</div>
+                        <div class="price">&nbsp;</div>
                         <p class="price-note">Go-live J14 · Budget média en sus · Paiement échelonné</p>
                         <ul class="pricing-features">
                             <li><i data-lucide="check"></i> Google Business Profile créé & optimisé</li>
@@ -2539,7 +2625,7 @@
                 <div class="pricing-row" style="grid-template-columns:repeat(3,1fr)">
                     <div class="pricing-card reveal">
                         <h4>Starter</h4>
-                        <div class="price">Sur devis</div>
+                        <div class="price">&nbsp;</div>
                         <p class="price-note">Maintenance & optimisation locale</p>
                         <ul class="pricing-features">
                             <li><i data-lucide="check"></i> Pilotage Google Ads léger</li>
@@ -2554,7 +2640,7 @@
                     <div class="pricing-card featured reveal">
                         <div class="pricing-card-badge">Recommandé</div>
                         <h4>Growth</h4>
-                        <div class="price">Sur devis</div>
+                        <div class="price">&nbsp;</div>
                         <p class="price-note">Acquisition & conversion</p>
                         <ul class="pricing-features">
                             <li><i data-lucide="check"></i> Pilotage Google Ads + Meta Ads</li>
@@ -2570,7 +2656,7 @@
                     </div>
                     <div class="pricing-card reveal">
                         <h4>Scale</h4>
-                        <div class="price">Sur devis</div>
+                        <div class="price">&nbsp;</div>
                         <p class="price-note">Expansion progressive multi-zones</p>
                         <ul class="pricing-features">
                             <li><i data-lucide="check"></i> Pilotage Google Ads + Meta Ads</li>
@@ -2656,7 +2742,7 @@
                     <div class="pricing-card featured reveal" style="border-top:4px solid var(--blue);background:linear-gradient(180deg,rgba(21,101,192,0.04) 0%,white 15%)">
                         <div class="pricing-card-badge" style="background:var(--blue)">Setup complet</div>
                         <h4 style="color:var(--blue)">Klaviyo Revenue Engine</h4>
-                        <div class="price">Sur devis</div>
+                        <div class="price">&nbsp;</div>
                         <p class="price-note">Setup complet · 2-3 semaines · Go-live J10-14</p>
                         <ul class="pricing-features">
                             <li><i data-lucide="check" style="color:var(--blue)"></i> Audit & stratégie personnalisée</li>
@@ -2672,7 +2758,7 @@
                     <div class="pricing-card featured reveal" style="border-top:4px solid var(--teal);background:linear-gradient(180deg,rgba(46,196,182,0.06) 0%,white 15%)">
                         <div class="pricing-card-badge" style="background:var(--teal)">Le plus complet</div>
                         <h4 style="color:var(--teal)">Growth Sprint 90 Jours</h4>
-                        <div class="price">Sur devis</div>
+                        <div class="price">&nbsp;</div>
                         <p class="price-note">Setup + 3 mois d'optimisation · Paiement échelonné</p>
                         <ul class="pricing-features">
                             <li><i data-lucide="check" style="color:var(--teal)"></i> Mois 1 : Audit + setup + 6 flows + segmentation + Go-live J14</li>
@@ -2690,7 +2776,7 @@
                 <div class="pricing-row" style="margin-top:16px">
                     <div class="pricing-card reveal" style="border-left:3px solid var(--coral)">
                         <h4>Audit Klaviyo — Quick Wins</h4>
-                        <div class="price" style="font-size:1.4rem">Sur devis</div>
+                        <div class="price" style="font-size:1.4rem">&nbsp;</div>
                         <p class="price-note">Livré en 7-10 jours · Point d'entrée recommandé</p>
                         <ul class="pricing-features">
                             <li><i data-lucide="check"></i> Audit complet Klaviyo (flows, segments, listes)</li>
@@ -2703,7 +2789,7 @@
                     </div>
                     <div class="pricing-card reveal" style="border-left:3px solid var(--navy)">
                         <h4>Retainers mensuels</h4>
-                        <div class="price" style="font-size:1.4rem">Sur devis</div>
+                        <div class="price" style="font-size:1.4rem">&nbsp;</div>
                         <p class="price-note">Engagement 3 mois · Préavis 30 jours</p>
                         <ul class="pricing-features">
                             <li><i data-lucide="check"></i> <strong>Light</strong> : 2 campagnes/mois, monitoring, 1 call 30 min, support 48h</li>
@@ -2717,7 +2803,7 @@
                 <div class="pricing-row" style="margin-top:32px;grid-template-columns:1fr 1fr">
                     <div class="pricing-card reveal" style="padding:24px">
                         <h4 style="font-size:1rem">Formation Klaviyo</h4>
-                        <div class="price" style="font-size:1.5rem">Sur devis</div>
+                        <div class="price" style="font-size:1.5rem">&nbsp;</div>
                         <p class="price-note">4 modules · 4 sessions live (1h30) · Devenez autonome</p>
                         <ul class="pricing-features" style="font-size:0.85rem">
                             <li><i data-lucide="check"></i> Fondamentaux Klaviyo, segmentation, flows, campagnes</li>
@@ -2728,7 +2814,7 @@
                     </div>
                     <div class="pricing-card reveal" style="padding:24px;background:var(--off-white);border:1px dashed var(--gray-300)">
                         <h4 style="font-size:1rem">Services complémentaires</h4>
-                        <div class="price" style="font-size:1.5rem;color:var(--gray-700)">Sur devis</div>
+                        <div class="price" style="font-size:1.5rem;color:var(--gray-700)">&nbsp;</div>
                         <p class="price-note">Copywriting conversion · Lancement produit · CRO Shopify</p>
                         <ul class="pricing-features" style="font-size:0.85rem">
                             <li><i data-lucide="check"></i> Landing pages & fiches produit optimisées</li>
@@ -2851,6 +2937,13 @@
                 <span class="line-2 text-blue">témoignages</span>
             </div>
 
+            <div style="position:relative">
+                <button class="testimonial-nav testimonial-prev" onclick="scrollTestimonials(-1)" aria-label="Précédent">
+                    <i data-lucide="chevron-left" style="width:20px;height:20px"></i>
+                </button>
+                <button class="testimonial-nav testimonial-next" onclick="scrollTestimonials(1)" aria-label="Suivant">
+                    <i data-lucide="chevron-right" style="width:20px;height:20px"></i>
+                </button>
             <div class="testimonial-grid">
                 <div class="testimonial-card reveal">
                     <p class="testimonial-text">Sonia a développé notre plateforme de réservation bien-être avec une vision claire du parcours utilisateur. Grâce à son travail, nos partenaires beauté reçoivent des réservations régulières et nos clients profitent d'offres attractives.</p>
@@ -2863,7 +2956,7 @@
                     </div>
                 </div>
                 <div class="testimonial-card reveal">
-                    <p class="testimonial-text">Sonia a su s'intégrer rapidement dans notre équipe et faire preuve d'initiative et de dynamisme. Une personne de confiance, ponctuelle et consciencieuse, appréciée de l'ensemble de ses collègues et supérieurs.</p>
+                    <p class="testimonial-text">Sonia a su s'intégrer rapidement et faire preuve d'initiative et de dynamisme. Une personne de confiance, consciencieuse et appréciée de l'ensemble de ses collaborateurs.</p>
                     <div class="testimonial-author">
                         <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Sandoz Fils SA" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--blue-glow)">
                         <div>
@@ -2892,6 +2985,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </section>
@@ -3023,7 +3117,7 @@
                         </span>
                     </div>
                     <div style="margin-top:16px;display:flex;gap:10px;justify-content:center">
-                        <a href="https://linkedin.com/in/ayke-solutions" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:50%;background:var(--blue-glow);display:flex;align-items:center;justify-content:center;color:var(--blue);text-decoration:none;transition:all 0.3s">
+                        <a href="https://www.linkedin.com/in/ayke-solutions-i-marketing-digital-i-automatisation-ia-055084390/" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:50%;background:var(--blue-glow);display:flex;align-items:center;justify-content:center;color:var(--blue);text-decoration:none;transition:all 0.3s">
                             <i data-lucide="linkedin" style="width:16px;height:16px"></i>
                         </a>
                         <a href="mailto:contact@ayke-solutions.com" style="width:36px;height:36px;border-radius:50%;background:var(--coral-glow);display:flex;align-items:center;justify-content:center;color:var(--coral);text-decoration:none;transition:all 0.3s">
@@ -3328,11 +3422,14 @@
                     <img src="logo-header-white.png" alt="Ayke Solutions" style="height:44px">
                     <p>Marketing digital & acquisition de leads pour PME locales et marques e-commerce. France & Suisse romande.</p>
                     <div class="footer-social">
-                        <a href="https://linkedin.com/in/ayke-solutions" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/in/ayke-solutions-i-marketing-digital-i-automatisation-ia-055084390/" target="_blank" rel="noopener" aria-label="LinkedIn">
                             <i data-lucide="linkedin" style="width:16px;height:16px"></i>
                         </a>
                         <a href="https://instagram.com/ayke.solutions" target="_blank" rel="noopener" aria-label="Instagram">
                             <i data-lucide="instagram" style="width:16px;height:16px"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ayke-solutions-i-marketing-digital-i-automatisation-ia-055084390/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <i data-lucide="linkedin" style="width:16px;height:16px"></i>
                         </a>
                         <a href="https://facebook.com/aykesolutions" target="_blank" rel="noopener" aria-label="Facebook">
                             <i data-lucide="facebook" style="width:16px;height:16px"></i>
@@ -3932,67 +4029,46 @@
     </script>
 
     <script>
-    // Testimonial horizontal scroll on hover + drag
+    // Testimonial auto-scroll + nav buttons
+    function scrollTestimonials(dir) {
+        const grid = document.querySelector('.testimonial-grid');
+        if (!grid) return;
+        const card = grid.querySelector('.testimonial-card');
+        const scrollAmt = card ? card.offsetWidth + 24 : 340;
+        grid.scrollBy({ left: dir * scrollAmt, behavior: 'smooth' });
+    }
+    
     document.addEventListener('DOMContentLoaded', function() {
         const grid = document.querySelector('.testimonial-grid');
         if (!grid) return;
         
-        let scrollSpeed = 0;
-        let animId = null;
-        let isDragging = false;
-        let startX, scrollLeft;
+        // Slow auto-scroll
+        let autoDir = 1;
+        let paused = false;
         
-        // Auto-scroll on hover (desktop)
-        grid.addEventListener('mouseenter', function(e) {
-            updateScroll(e);
-        });
-        
-        grid.addEventListener('mousemove', function(e) {
-            if (isDragging) return;
-            updateScroll(e);
-        });
-        
-        grid.addEventListener('mouseleave', function() {
-            scrollSpeed = 0;
-            if (animId) cancelAnimationFrame(animId);
-        });
-        
-        function updateScroll(e) {
-            const rect = grid.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const pct = x / rect.width;
-            if (pct < 0.25) scrollSpeed = -2;
-            else if (pct > 0.75) scrollSpeed = 2;
-            else scrollSpeed = 0;
-            
-            if (scrollSpeed !== 0 && !animId) animate();
+        function autoScroll() {
+            if (paused) return;
+            const maxScroll = grid.scrollWidth - grid.clientWidth;
+            if (grid.scrollLeft >= maxScroll - 2) autoDir = -1;
+            if (grid.scrollLeft <= 2) autoDir = 1;
+            grid.scrollLeft += autoDir * 0.5;
         }
         
-        function animate() {
-            if (scrollSpeed === 0) { animId = null; return; }
-            grid.scrollLeft += scrollSpeed;
-            animId = requestAnimationFrame(animate);
-        }
+        const interval = setInterval(autoScroll, 20);
         
-        // Drag to scroll (mobile + desktop)
-        grid.addEventListener('mousedown', function(e) {
-            isDragging = true; startX = e.pageX - grid.offsetLeft; scrollLeft = grid.scrollLeft;
-            grid.style.cursor = 'grabbing';
-        });
-        grid.addEventListener('mouseleave', function() { isDragging = false; grid.style.cursor = 'grab'; });
-        grid.addEventListener('mouseup', function() { isDragging = false; grid.style.cursor = 'grab'; });
-        grid.addEventListener('mousemove', function(e) {
-            if (!isDragging) return;
-            e.preventDefault();
-            grid.scrollLeft = scrollLeft - (e.pageX - grid.offsetLeft - startX);
-        });
+        // Pause on hover/touch
+        grid.addEventListener('mouseenter', function() { paused = true; });
+        grid.addEventListener('mouseleave', function() { paused = false; });
+        grid.addEventListener('touchstart', function() { paused = true; }, {passive: true});
+        grid.addEventListener('touchend', function() { setTimeout(function(){ paused = false; }, 3000); });
         
         // Touch drag for mobile
+        let startX, scrollLeft;
         grid.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].pageX - grid.offsetLeft; scrollLeft = grid.scrollLeft;
+            startX = e.touches[0].pageX; scrollLeft = grid.scrollLeft;
         }, {passive: true});
         grid.addEventListener('touchmove', function(e) {
-            grid.scrollLeft = scrollLeft - (e.touches[0].pageX - grid.offsetLeft - startX);
+            grid.scrollLeft = scrollLeft - (e.touches[0].pageX - startX);
         }, {passive: true});
     });
     </script>

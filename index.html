@@ -331,9 +331,10 @@
         .mobile-menu {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: linear-gradient(160deg, var(--navy-deep) 0%, #0a1628 100%);
-            z-index: 999; flex-direction: column;
+            z-index: 9999; flex-direction: column;
             align-items: center; justify-content: center; gap: 0;
             opacity: 0; transition: opacity 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
         .mobile-menu.active { display: flex; opacity: 1; }
         .mobile-menu > a {
@@ -356,10 +357,12 @@
             gap: 10px; align-items: center; color: rgba(255,255,255,0.3); font-size: 0.75rem;
         }
         .mobile-close {
-            position: absolute; top: 20px; right: 24px; background: none;
-            border: none; color: white; cursor: pointer; z-index: 1001;
-            width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+            position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2); color: white; cursor: pointer; z-index: 1001;
+            width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; transition: all 0.3s; -webkit-tap-highlight-color: transparent;
         }
+        .mobile-close:hover, .mobile-close:active { background: rgba(255,255,255,0.2); transform: scale(1.1); }
 
         /* ============================================
            HERO
@@ -1464,7 +1467,7 @@
             .pricing-features .features-toggle i { width: 14px; height: 14px; transition: transform 0.3s; }
             .pricing-features.expanded .features-toggle i { transform: rotate(180deg); }
             .pricing-features.expanded .features-toggle .toggle-text::after { content: 'Réduire'; }
-            .pricing-features:not(.expanded) .features-toggle .toggle-text::after { content: 'Voir les ' attr(data-count) ' détails'; }
+            .pricing-features:not(.expanded) .features-toggle .toggle-text::after { content: 'Voir les détails'; }
 
             /* Toggle pill mobile */
             .toggle-pill { width: 100%; max-width: 340px; }
@@ -2286,7 +2289,7 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-close" onclick="closeMobile()">
-            <i data-lucide="x" style="width:28px;height:28px"></i>
+            <i data-lucide="x" style="width:32px;height:32px"></i>
         </button>
         <a href="#services" onclick="closeMobile()">Services</a>
         <a href="#resultats" onclick="closeMobile()">Résultats</a>
@@ -3546,10 +3549,10 @@
                         const toggleBtn = document.createElement('button');
                         toggleBtn.type = 'button';
                         toggleBtn.className = 'features-toggle';
-                        toggleBtn.innerHTML = '<span class="toggle-text">Voir les ' + hiddenCount + ' détails</span> <i data-lucide="chevron-down"></i>';
+                        toggleBtn.innerHTML = '<span class="toggle-text">Voir les détails</span> <i data-lucide="chevron-down"></i>';
                         toggleBtn.addEventListener('click', function() {
                             const expanded = ul.classList.toggle('expanded');
-                            this.querySelector('.toggle-text').textContent = expanded ? 'Réduire' : 'Voir les ' + hiddenCount + ' détails';
+                            this.querySelector('.toggle-text').textContent = expanded ? 'Réduire' : 'Voir les détails';
                         });
                         ul.appendChild(toggleBtn);
                         lucide.createIcons({ nodes: [toggleBtn] });
@@ -3570,8 +3573,14 @@
         });
 
         // ===== MOBILE MENU =====
-        function openMobile() { document.getElementById('mobileMenu').classList.add('active'); }
-        function closeMobile() { document.getElementById('mobileMenu').classList.remove('active'); }
+        function openMobile() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMobile() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
         // ===== AXE TOGGLE PILL =====
         function switchAxe(axe) {
@@ -4031,48 +4040,79 @@
     </script>
 
     <script>
-    // Testimonial auto-scroll + nav buttons
-    function scrollTestimonials(dir) {
-        const grid = document.querySelector('.testimonial-grid');
-        if (!grid) return;
-        const card = grid.querySelector('.testimonial-card');
-        const scrollAmt = card ? card.offsetWidth + 24 : 340;
-        grid.scrollBy({ left: dir * scrollAmt, behavior: 'smooth' });
-    }
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        const grid = document.querySelector('.testimonial-grid');
-        if (!grid) return;
-        
-        // Slow auto-scroll
-        let autoDir = 1;
-        let paused = false;
-        
-        function autoScroll() {
-            if (paused) return;
-            const maxScroll = grid.scrollWidth - grid.clientWidth;
-            if (grid.scrollLeft >= maxScroll - 2) autoDir = -1;
-            if (grid.scrollLeft <= 2) autoDir = 1;
-            grid.scrollLeft += autoDir * 0.5;
+    // Testimonial infinite carousel
+    (function() {
+        function initTestimonialCarousel() {
+            const grid = document.querySelector('.testimonial-grid');
+            if (!grid) return;
+            
+            // Clone all cards for infinite loop
+            const cards = grid.querySelectorAll('.testimonial-card');
+            cards.forEach(function(card) {
+                const clone = card.cloneNode(true);
+                clone.classList.add('testimonial-clone');
+                grid.appendChild(clone);
+            });
+            
+            // Re-init lucide icons on clones
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            
+            const cardWidth = cards[0].offsetWidth + 24;
+            const totalOriginal = cards.length * cardWidth;
+            let paused = false;
+            
+            // Auto-scroll
+            function autoScroll() {
+                if (paused) return;
+                grid.scrollLeft += 0.8;
+                // Loop back seamlessly
+                if (grid.scrollLeft >= totalOriginal) {
+                    grid.scrollLeft -= totalOriginal;
+                }
+            }
+            setInterval(autoScroll, 16);
+            
+            // Pause on interaction
+            grid.addEventListener('mouseenter', function() { paused = true; });
+            grid.addEventListener('mouseleave', function() { paused = false; });
+            grid.addEventListener('touchstart', function() { paused = true; }, {passive: true});
+            grid.addEventListener('touchend', function() { setTimeout(function(){ paused = false; }, 3000); });
+            
+            // Touch drag
+            var startX, scrollLeft;
+            grid.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].pageX; scrollLeft = grid.scrollLeft;
+            }, {passive: true});
+            grid.addEventListener('touchmove', function(e) {
+                grid.scrollLeft = scrollLeft - (e.touches[0].pageX - startX);
+            }, {passive: true});
+            
+            // Button nav — fast, with loop
+            window.scrollTestimonials = function(dir) {
+                paused = true;
+                var amt = cardWidth * 1;
+                var target = grid.scrollLeft + dir * amt;
+                
+                // Handle looping
+                if (target < 0) {
+                    grid.scrollLeft += totalOriginal;
+                    target += totalOriginal;
+                } else if (target >= totalOriginal) {
+                    grid.scrollLeft -= totalOriginal;
+                    target -= totalOriginal;
+                }
+                
+                grid.scrollTo({ left: target, behavior: 'smooth' });
+                setTimeout(function() { paused = false; }, 2000);
+            };
         }
         
-        const interval = setInterval(autoScroll, 20);
-        
-        // Pause on hover/touch
-        grid.addEventListener('mouseenter', function() { paused = true; });
-        grid.addEventListener('mouseleave', function() { paused = false; });
-        grid.addEventListener('touchstart', function() { paused = true; }, {passive: true});
-        grid.addEventListener('touchend', function() { setTimeout(function(){ paused = false; }, 3000); });
-        
-        // Touch drag for mobile
-        let startX, scrollLeft;
-        grid.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].pageX; scrollLeft = grid.scrollLeft;
-        }, {passive: true});
-        grid.addEventListener('touchmove', function(e) {
-            grid.scrollLeft = scrollLeft - (e.touches[0].pageX - startX);
-        }, {passive: true});
-    });
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() { setTimeout(initTestimonialCarousel, 500); });
+        } else {
+            setTimeout(initTestimonialCarousel, 500);
+        }
+    })();
     </script>
 </div>
 </body>

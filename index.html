@@ -372,7 +372,7 @@
         }
         .hero::before {
             content: ''; position: absolute; top: -50%; right: -20%;
-            width: 900px; height: 900px; pointer-events: none; border-radius: 50%;
+            width: 900px; height: 900px; border-radius: 50%;
             background: radial-gradient(circle, rgba(21,101,192,0.25) 0%, transparent 60%);
             animation: orbFloat1 8s ease-in-out infinite;
         }
@@ -1023,10 +1023,6 @@
             font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6;
         }
 
-
-        /* Hide testimonial carousel scrollbar */
-        .testimonial-carousel::-webkit-scrollbar { display: none; }
-        .testimonial-carousel { -ms-overflow-style: none; scrollbar-width: none; }
         /* ============================================
            TESTIMONIALS / REFERENCES
            ============================================ */
@@ -1336,14 +1332,14 @@
         @media (max-width: 968px) {
             /* === ANTI-OVERFLOW HORIZONTAL === */
             html, body { overflow-x: clip !important; max-width: 100vw !important; width: 100% !important; }
-            *, *::before, *::after { max-width: 100vw; }
-            .section, section, .hero, .cta-section, footer { overflow: hidden !important; max-width: 100vw; }
+            .section, section, .hero, .cta-section, footer { overflow: hidden !important; }
             .hero::before, .hero::after { display: none !important; }
             .about::before, .about::after { display: none !important; }
             .section-decor { display: none !important; }
             .floating-orb { display: none !important; }
             .decor-circle, .decor-plus, .decor-dots-grid, .about-photo-decor { display: none !important; }
             svg.wave-divider { max-width: 100% !important; overflow: hidden; }
+            *, *::before, *::after { max-width: 100vw; }
 
             .nav { display: none; }
             .mobile-toggle { display: block; }
@@ -2324,24 +2320,24 @@
         <div class="logo-carousel-label">Expériences & collaborations</div>
         <div class="logo-track">
             <!-- Clients -->
-            <div class="logo-item"><img src="logos/juracime.svg" alt="Juracime" height="40"></div>
-            <div class="logo-item"><img src="logos/sandoz.svg" alt="Sandoz Fils SA" height="40"></div>
-            <div class="logo-item"><img src="logos/stg-energy.svg" alt="STG Energy" height="40"></div>
-            <div class="logo-item"><img src="logos/buzzbeauty.svg" alt="BuzzBeauty.ch" height="40"></div>
-            <div class="logo-item"><img src="logos/proconcept.svg" alt="Proconcept ERP" height="40"></div>
+            <div class="logo-item"><img src="juracime.png" alt="Juracime" height="40"></div>
+            <div class="logo-item"><img src="sandoz.png" alt="Sandoz Fils SA" height="40"></div>
+            <div class="logo-item"><img src="stg-energy.png" alt="STG Energy" height="40"></div>
+            <div class="logo-item"><img src="buzzbeauty.jpg" alt="BuzzBeauty.ch" height="40"></div>
+            <div class="logo-item"><img src="proconcept.png" alt="Proconcept ERP" height="40"></div>
             <!-- Certifications -->
-            <div class="logo-item"><img src="logos/klaviyo-badge.svg" alt="Klaviyo Partner" height="40"></div>
-            <div class="logo-item"><img src="logos/shopify-badge.svg" alt="Shopify Partner" height="40"></div>
-            <div class="logo-item"><img src="logos/google-ads-badge.svg" alt="Google Ads Certified" height="40"></div>
+            <div class="logo-item"><img src="klaviyo-badge.png" alt="Klaviyo Partner" height="40"></div>
+            <div class="logo-item"><img src="shopify-badge.png" alt="Shopify Partner" height="40"></div>
+            <div class="logo-item"><img src="google-ads-badge.png" alt="Google Ads Certified" height="40"></div>
             <!-- Duplicate set for seamless loop -->
-            <div class="logo-item"><img src="logos/juracime.svg" alt="Juracime" height="40"></div>
-            <div class="logo-item"><img src="logos/sandoz.svg" alt="Sandoz Fils SA" height="40"></div>
-            <div class="logo-item"><img src="logos/stg-energy.svg" alt="STG Energy" height="40"></div>
-            <div class="logo-item"><img src="logos/buzzbeauty.svg" alt="BuzzBeauty.ch" height="40"></div>
-            <div class="logo-item"><img src="logos/proconcept.svg" alt="Proconcept ERP" height="40"></div>
-            <div class="logo-item"><img src="logos/klaviyo-badge.svg" alt="Klaviyo Partner" height="40"></div>
-            <div class="logo-item"><img src="logos/shopify-badge.svg" alt="Shopify Partner" height="40"></div>
-            <div class="logo-item"><img src="logos/google-ads-badge.svg" alt="Google Ads Certified" height="40"></div>
+            <div class="logo-item"><img src="juracime.png" alt="Juracime" height="40"></div>
+            <div class="logo-item"><img src="sandoz.png" alt="Sandoz Fils SA" height="40"></div>
+            <div class="logo-item"><img src="stg-energy.png" alt="STG Energy" height="40"></div>
+            <div class="logo-item"><img src="buzzbeauty.jpg" alt="BuzzBeauty.ch" height="40"></div>
+            <div class="logo-item"><img src="proconcept.png" alt="Proconcept ERP" height="40"></div>
+            <div class="logo-item"><img src="klaviyo-badge.png" alt="Klaviyo Partner" height="40"></div>
+            <div class="logo-item"><img src="shopify-badge.png" alt="Shopify Partner" height="40"></div>
+            <div class="logo-item"><img src="google-ads-badge.png" alt="Google Ads Certified" height="40"></div>
         </div>
     </div>
 
@@ -2906,11 +2902,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- Navigation buttons -->
-                <button onclick="scrollTestimonials(-1)" style="position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:white;border:1px solid var(--gray-200);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);z-index:10;transition:all 0.3s" onmouseover="this.style.background='var(--coral)';this.style.color='white';this.style.borderColor='var(--coral)'" onmouseout="this.style.background='white';this.style.color='inherit';this.style.borderColor='var(--gray-200)'">
+                <button onclick="scrollTestimonials(-1)" style="position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:white;border:1px solid var(--gray-200);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);z-index:10;transition:all 0.3s" aria-label="Précédent">
                     <i data-lucide="chevron-left" style="width:20px;height:20px"></i>
                 </button>
-                <button onclick="scrollTestimonials(1)" style="position:absolute;right:-16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:white;border:1px solid var(--gray-200);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);z-index:10;transition:all 0.3s" onmouseover="this.style.background='var(--coral)';this.style.color='white';this.style.borderColor='var(--coral)'" onmouseout="this.style.background='white';this.style.color='inherit';this.style.borderColor='var(--gray-200)'">
+                <button onclick="scrollTestimonials(1)" style="position:absolute;right:-16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:white;border:1px solid var(--gray-200);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);z-index:10;transition:all 0.3s" aria-label="Suivant">
                     <i data-lucide="chevron-right" style="width:20px;height:20px"></i>
                 </button>
             </div>
@@ -3488,7 +3483,6 @@
             const isMobile = window.innerWidth <= 640;
             document.querySelectorAll('.pricing-features').forEach(ul => {
                 const items = ul.querySelectorAll('li');
-                // ALWAYS remove existing toggles first to prevent duplicates
                 ul.querySelectorAll('.features-toggle').forEach(t => t.remove());
                 if (items.length <= 3) {
                     ul.classList.remove('collapsible', 'expanded');
@@ -3496,7 +3490,6 @@
                 }
                 if (isMobile) {
                     ul.classList.add('collapsible');
-                    const hiddenCount = items.length - 3;
                     const toggleBtn = document.createElement('button');
                     toggleBtn.type = 'button';
                     toggleBtn.className = 'features-toggle';
@@ -3521,50 +3514,42 @@
         function scrollTestimonials(direction) {
             const carousel = document.getElementById('testimonialCarousel');
             if (!carousel) return;
-            const cardWidth = carousel.querySelector('.testimonial-card').offsetWidth + 20; // card + gap
+            const cardWidth = carousel.querySelector('.testimonial-card').offsetWidth + 20;
             carousel.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
         }
-
-        // Infinite loop: when reaching the end, jump back to start (and vice versa)
         (function initTestimonialLoop() {
             const carousel = document.getElementById('testimonialCarousel');
             if (!carousel) return;
-            const cards = carousel.querySelectorAll('.testimonial-card');
+            const cards = Array.from(carousel.querySelectorAll('.testimonial-card'));
             if (cards.length === 0) return;
-            
-            // Clone cards for seamless loop
             cards.forEach(card => {
                 const clone = card.cloneNode(true);
-                clone.classList.add('clone');
                 carousel.appendChild(clone);
             });
-            // Also prepend clones
             Array.from(cards).reverse().forEach(card => {
                 const clone = card.cloneNode(true);
-                clone.classList.add('clone');
                 carousel.insertBefore(clone, carousel.firstChild);
             });
-            
-            // Start at the real first card
             const cardWidth = cards[0].offsetWidth + 20;
             carousel.scrollLeft = cardWidth * cards.length;
-            
+            let scrollTimeout;
             carousel.addEventListener('scroll', function() {
-                const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-                if (carousel.scrollLeft <= 10) {
-                    carousel.style.scrollBehavior = 'auto';
-                    carousel.scrollLeft = cardWidth * cards.length;
-                    carousel.style.scrollBehavior = 'smooth';
-                } else if (carousel.scrollLeft >= maxScroll - 10) {
-                    carousel.style.scrollBehavior = 'auto';
-                    carousel.scrollLeft = cardWidth * cards.length;
-                    carousel.style.scrollBehavior = 'smooth';
-                }
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+                    if (carousel.scrollLeft <= 10) {
+                        carousel.style.scrollBehavior = 'auto';
+                        carousel.scrollLeft = cardWidth * cards.length;
+                        carousel.style.scrollBehavior = 'smooth';
+                    } else if (carousel.scrollLeft >= maxScroll - 10) {
+                        carousel.style.scrollBehavior = 'auto';
+                        carousel.scrollLeft = cardWidth * cards.length;
+                        carousel.style.scrollBehavior = 'smooth';
+                    }
+                }, 50);
             });
-            
-            // Hide scrollbar
-            carousel.style.msOverflowStyle = 'none';
         })();
+
         // ===== HEADER SCROLL =====
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {

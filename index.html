@@ -183,6 +183,27 @@
 
         html { scroll-behavior: smooth; font-size: 16px; overflow-x: clip; }
         body { overflow-x: clip; width: 100%; max-width: 100%; }
+        /* NUCLEAR WHITE BAR FIX */
+        html, body, #page-wrapper {
+            overflow-x: clip !important;
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+        section, .hero, .trust-bar, .logo-carousel, .cta-section, footer,
+        .wave-divider, .testimonials, .problems, .about {
+            max-width: 100vw !important;
+            overflow-x: clip !important;
+        }
+        /* Kill ALL pseudo-elements that overflow on mobile */
+        @media (max-width: 968px) {
+            .hero::before, .hero::after,
+            .section-decor, .floating-orb,
+            .decor-circle, .decor-plus, .decor-dots-grid,
+            .about-photo-decor {
+                display: none !important;
+            }
+        }
+
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -342,10 +363,9 @@
             font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 700;
             text-transform: uppercase; letter-spacing: 1px;
             padding: 14px 0; transition: all 0.3s;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border: none;
             width: 70%; text-align: center;
         }
-        .mobile-menu > a:last-of-type { border-bottom: none; }
         .mobile-menu a:hover, .mobile-menu a:active { color: var(--coral); }
         .mobile-menu .btn {
             margin-top: 24px; font-family: 'Inter', sans-serif;
@@ -357,12 +377,14 @@
             gap: 10px; align-items: center; color: rgba(255,255,255,0.3); font-size: 0.75rem;
         }
         .mobile-close {
-            position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2); color: white; cursor: pointer; z-index: 1001;
-            width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
+            position: fixed; top: 16px; right: 16px; background: var(--coral);
+            border: none; color: white; cursor: pointer; z-index: 10000;
+            width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
             border-radius: 50%; transition: all 0.3s; -webkit-tap-highlight-color: transparent;
+            box-shadow: 0 4px 16px rgba(232,132,92,0.4);
+            touch-action: manipulation;
         }
-        .mobile-close:hover, .mobile-close:active { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+        .mobile-close:hover, .mobile-close:active { background: #d4724e; transform: scale(1.1); }
 
         /* ============================================
            HERO
@@ -1030,10 +1052,11 @@
            ============================================ */
         .testimonials { padding: 100px 0; background: var(--off-white); }
         .testimonial-grid {
-            display: flex; gap: 24px; margin-top: 48px;
+            display: flex; gap: 20px; margin-top: 48px;
             overflow-x: auto; scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
             -ms-overflow-style: none; scrollbar-width: none;
-            padding-bottom: 8px; cursor: grab;
+            padding: 10px 0 10px; cursor: grab;
         }
         .testimonial-grid::-webkit-scrollbar { display: none; }
         .testimonial-grid:active { cursor: grabbing; }
@@ -1057,11 +1080,12 @@
         }
 
         .testimonial-card {
-            background: white; border-radius: var(--radius-lg); padding: 32px;
+            background: white; border-radius: var(--radius-lg); padding: 24px;
             border: 1px solid var(--gray-100); position: relative;
             border-bottom: 3px solid var(--coral);
             transition: all 0.4s;
-            min-width: 320px; max-width: 360px; flex-shrink: 0;
+            min-width: 280px; max-width: 300px; flex-shrink: 0;
+            scroll-snap-align: center;
         }
         .testimonial-card:hover {
             transform: translateY(-6px);
@@ -2188,6 +2212,30 @@
             50% { box-shadow: 0 4px 28px rgba(232,132,92,0.5); }
         }
         .cta-section .btn-primary { animation: ctaPulse 3s ease-in-out infinite; }
+        /* ABOUT section mobile */
+        @media (max-width: 640px) {
+            #a-propos .container { text-align: center; padding: 0 12px; }
+            #a-propos .stacked-title { align-items: center; text-align: center; }
+            #a-propos .stacked-title .line-1 { font-size: 1.3rem !important; }
+            #a-propos .stacked-title .line-2 { font-size: 1.6rem !important; }
+            #a-propos .stacked-title .line-3 { font-size: 1.2rem !important; }
+            .about-grid { text-align: center; }
+            .about-text { text-align: center; }
+            .about-text h3 { font-size: 1rem !important; line-height: 1.4; }
+            .about-text p { font-size: 0.82rem !important; line-height: 1.6; }
+            .about-badges { justify-content: center; flex-wrap: wrap; }
+            .about-badges .badge { font-size: 0.7rem; }
+            .about-name { font-size: 1.1rem !important; }
+            .about-title { font-size: 0.85rem !important; }
+            .about-locations { flex-direction: column; gap: 6px; align-items: center; }
+            /* Mini galerie */
+            .about-text > div[style*="display:flex"][style*="gap:12px"] {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+            .about-text .photo-frame { height: 100px !important; min-width: 0 !important; }
+        }
+
 
         /* MOBILE HERO CARDS — prevent text cutoff */
         @media (max-width: 640px) {
@@ -3544,7 +3592,8 @@
                 }
                 if (isMobile) {
                     ul.classList.add('collapsible');
-                    if (!existingToggle) {
+                    if (existingToggle) { existingToggle.remove(); }
+                    {
                         const hiddenCount = items.length - 3;
                         const toggleBtn = document.createElement('button');
                         toggleBtn.type = 'button';
@@ -4040,78 +4089,67 @@
     </script>
 
     <script>
-    // Testimonial infinite carousel
+    // Testimonial carousel — infinite loop with snap
     (function() {
-        function initTestimonialCarousel() {
-            const grid = document.querySelector('.testimonial-grid');
+        function init() {
+            var grid = document.querySelector('.testimonial-grid');
             if (!grid) return;
             
-            // Clone all cards for infinite loop
-            const cards = grid.querySelectorAll('.testimonial-card');
-            cards.forEach(function(card) {
-                const clone = card.cloneNode(true);
-                clone.classList.add('testimonial-clone');
-                grid.appendChild(clone);
-            });
+            var cards = Array.from(grid.querySelectorAll('.testimonial-card:not(.tclone)'));
+            if (!cards.length) return;
             
-            // Re-init lucide icons on clones
+            // Clone cards 3x for seamless loop
+            for (var c = 0; c < 3; c++) {
+                cards.forEach(function(card) {
+                    var cl = card.cloneNode(true);
+                    cl.classList.add('tclone');
+                    grid.appendChild(cl);
+                });
+            }
             if (typeof lucide !== 'undefined') lucide.createIcons();
             
-            const cardWidth = cards[0].offsetWidth + 24;
-            const totalOriginal = cards.length * cardWidth;
-            let paused = false;
+            var gap = 20;
+            var cardW = cards[0].offsetWidth + gap;
+            var setW = cards.length * cardW;
+            var paused = false;
+            
+            // Start in the middle set
+            grid.scrollLeft = setW;
+            
+            // Loop reset
+            function checkLoop() {
+                if (grid.scrollLeft >= setW * 3) grid.scrollLeft -= setW;
+                if (grid.scrollLeft <= 0) grid.scrollLeft += setW;
+            }
+            grid.addEventListener('scroll', checkLoop);
             
             // Auto-scroll
-            function autoScroll() {
-                if (paused) return;
-                grid.scrollLeft += 0.8;
-                // Loop back seamlessly
-                if (grid.scrollLeft >= totalOriginal) {
-                    grid.scrollLeft -= totalOriginal;
-                }
-            }
-            setInterval(autoScroll, 16);
+            setInterval(function() {
+                if (!paused) grid.scrollLeft += 1;
+            }, 16);
             
-            // Pause on interaction
+            // Pause
             grid.addEventListener('mouseenter', function() { paused = true; });
             grid.addEventListener('mouseleave', function() { paused = false; });
             grid.addEventListener('touchstart', function() { paused = true; }, {passive: true});
-            grid.addEventListener('touchend', function() { setTimeout(function(){ paused = false; }, 3000); });
+            grid.addEventListener('touchend', function() { setTimeout(function(){ paused = false; }, 2500); });
             
             // Touch drag
-            var startX, scrollLeft;
-            grid.addEventListener('touchstart', function(e) {
-                startX = e.touches[0].pageX; scrollLeft = grid.scrollLeft;
-            }, {passive: true});
-            grid.addEventListener('touchmove', function(e) {
-                grid.scrollLeft = scrollLeft - (e.touches[0].pageX - startX);
-            }, {passive: true});
+            var sx, sl;
+            grid.addEventListener('touchstart', function(e) { sx = e.touches[0].pageX; sl = grid.scrollLeft; }, {passive:true});
+            grid.addEventListener('touchmove', function(e) { grid.scrollLeft = sl - (e.touches[0].pageX - sx); }, {passive:true});
             
-            // Button nav — fast, with loop
+            // Nav buttons
             window.scrollTestimonials = function(dir) {
                 paused = true;
-                var amt = cardWidth * 1;
-                var target = grid.scrollLeft + dir * amt;
-                
-                // Handle looping
-                if (target < 0) {
-                    grid.scrollLeft += totalOriginal;
-                    target += totalOriginal;
-                } else if (target >= totalOriginal) {
-                    grid.scrollLeft -= totalOriginal;
-                    target -= totalOriginal;
-                }
-                
-                grid.scrollTo({ left: target, behavior: 'smooth' });
+                grid.scrollBy({ left: dir * cardW, behavior: 'smooth' });
                 setTimeout(function() { paused = false; }, 2000);
             };
         }
         
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() { setTimeout(initTestimonialCarousel, 500); });
-        } else {
-            setTimeout(initTestimonialCarousel, 500);
-        }
+            document.addEventListener('DOMContentLoaded', function() { setTimeout(init, 600); });
+        } else { setTimeout(init, 600); }
     })();
     </script>
 </div>

@@ -586,7 +586,7 @@
         }
         .logo-track {
             display: flex; gap: 60px; align-items: center;
-            animation: scrollLogos 20s linear infinite;
+            animation: scrollLogos 12s linear infinite;
             width: max-content;
         }
         .logo-track:hover { animation-play-state: paused; }
@@ -1294,8 +1294,9 @@
         }
         .footer-social a {
             width: 36px; height: 36px; border-radius: 50%;
-            background: rgba(255,255,255,0.08); display: flex;
+            background: none; display: flex;
             align-items: center; justify-content: center;
+            overflow: hidden;
             transition: all 0.2s;
         }
         .footer-social a:hover { background: var(--coral); color: white; }
@@ -3011,9 +3012,12 @@
                         <img src="photos%20sonia%20catic/portrait.png" alt="Sonia CATIC" class="about-photo-img"
                              style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:inherit;position:absolute;top:0;left:0;z-index:2"
                              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <!-- Logo fallback overlay with design filter -->
+                        <div class="about-logo-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:inherit;z-index:1;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(15,35,64,0.85),rgba(21,101,192,0.7))">
+                            <img src="Logo seul 1254x1254 PNG.png" alt="Ayke Solutions" style="width:60%;max-width:150px;;opacity:0.9">
+                        </div>
                         <div class="about-photo-placeholder" style="display:none">
-                            <img src="Logo seul 1254x1254 PNG.png" alt="Sonia CATIC" style="width:100px;filter:brightness(10);opacity:0.8">
-                            <span style="color:rgba(255,255,255,0.5);font-size:0.75rem;margin-top:12px;letter-spacing:1px;text-transform:uppercase">portrait.jpg</span>
+                            <img src="Logo seul 1254x1254 PNG.png" alt="Ayke Solutions" style="width:120px;opacity:0.9">
                         </div>
                         <!-- Éléments décoratifs -->
                         <div class="about-photo-decor dots"></div>
@@ -3034,7 +3038,7 @@
                     </div>
                     <div style="margin-top:16px;display:flex;gap:10px;justify-content:center">
                         <a href="https://www.linkedin.com/in/ayke-solutions-i-marketing-digital-i-automatisation-ia-055084390/" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:50%;background:var(--blue-glow);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 0.3s">
-                            <img src="linkedin.png" alt="LinkedIn" style="width:18px;height:18px;object-fit:contain">
+                            <img src="linkedin.png" alt="LinkedIn" style="width:20px;height:20px;object-fit:contain;border-radius:4px">
                         </a>
                         <a href="mailto:contact@ayke-solutions.com" style="width:36px;height:36px;border-radius:50%;background:var(--coral-glow);display:flex;align-items:center;justify-content:center;color:var(--coral);text-decoration:none;transition:all 0.3s">
                             <i data-lucide="mail" style="width:16px;height:16px"></i>
@@ -3372,16 +3376,16 @@
                     <p>Marketing digital & acquisition de leads pour PME locales et marques e-commerce. France & Suisse romande.</p>
                     <div class="footer-social">
                         <a href="https://www.linkedin.com/in/ayke-solutions-i-marketing-digital-i-automatisation-ia-055084390/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                            <img src="linkedin.png" alt="LinkedIn" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
+                            <img src="linkedin.png" alt="LinkedIn" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
                         </a>
                         <a href="https://facebook.com/aykesolutions" target="_blank" rel="noopener" aria-label="Facebook">
-                            <img src="facebook.png" alt="Facebook" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
+                            <img src="facebook.png" alt="Facebook" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
                         </a>
                         <a href="https://instagram.com/ayke.solutions" target="_blank" rel="noopener" aria-label="Instagram">
-                            <img src="instagram.png" alt="Instagram" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
+                            <img src="instagram.png" alt="Instagram" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
                         </a>
                         <a href="https://tiktok.com/@ayke.solutions" target="_blank" rel="noopener" aria-label="TikTok">
-                            <img src="tiktok.png" alt="TikTok" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
+                            <img src="tiktok.png" alt="TikTok" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
                         </a>
                     </div>
                 </div>

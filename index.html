@@ -1026,14 +1026,19 @@
            ============================================ */
         .testimonials { padding: 100px 0; background: var(--off-white); }
         .testimonial-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px; margin-top: 48px;
+            display: flex; gap: 24px; margin-top: 48px;
+            overflow-x: auto; scroll-behavior: smooth;
+            -ms-overflow-style: none; scrollbar-width: none;
+            padding-bottom: 8px; cursor: grab;
         }
+        .testimonial-grid::-webkit-scrollbar { display: none; }
+        .testimonial-grid:active { cursor: grabbing; }
         .testimonial-card {
             background: white; border-radius: var(--radius-lg); padding: 32px;
             border: 1px solid var(--gray-100); position: relative;
             border-bottom: 3px solid var(--coral);
             transition: all 0.4s;
+            min-width: 320px; max-width: 360px; flex-shrink: 0;
         }
         .testimonial-card:hover {
             transform: translateY(-6px);
@@ -1041,6 +1046,7 @@
         }
         .testimonial-card:nth-child(2) { border-bottom-color: var(--blue); }
         .testimonial-card:nth-child(3) { border-bottom-color: var(--teal); }
+        .testimonial-card:nth-child(4) { border-bottom-color: var(--gold); }
         .testimonial-card::before {
             content: '"'; position: absolute; top: 16px; left: 24px;
             font-family: 'Playfair Display', serif; font-size: 4rem;
@@ -1329,7 +1335,7 @@
            ============================================ */
         @media (max-width: 968px) {
             /* === ANTI-OVERFLOW HORIZONTAL === */
-            html, body { overflow-x: hidden !important; max-width: 100vw; }
+            html, body { overflow-x: hidden !important; max-width: 100vw; width: 100%; }
             .section, section, .hero, .cta-section, footer { overflow: hidden !important; }
             .hero::before, .hero::after { display: none; }
             .section-decor { display: none !important; }
@@ -1347,7 +1353,7 @@
             .about-grid { grid-template-columns: 1fr; }
             .about-image { margin-bottom: 32px; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
-            .testimonial-grid { grid-template-columns: 1fr; }
+            .testimonial-grid { gap: 16px; }
 
             /* Photo dans les hero cards PME/Ecom */
             .pme-hero-card { flex-direction: column !important; }
@@ -1457,7 +1463,7 @@
             .result-card { padding: 20px; }
 
             /* Testimonials */
-            .testimonial-grid { grid-template-columns: 1fr; }
+            .testimonial-grid { gap: 16px; }
 
             /* Resources */
             #ressources .container > div:last-child { grid-template-columns: 1fr !important; }
@@ -2158,6 +2164,12 @@
 
     </style>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+
+    <script>
+    // Force scroll to top on page load
+    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+    window.addEventListener('load', function() { window.scrollTo(0, 0); });
+    </script>
 </head>
 <body>
 
@@ -2225,12 +2237,7 @@
         </div>
         <div class="container">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="badge badge-white">
-                        <i data-lucide="zap" style="width:14px;height:14px"></i>
-                        Disponible pour 2 nouveaux projets / mois
-                    </span>
-                </div>
+
                 <div class="stacked-title" style="margin-bottom:24px">
                     <span class="line-1 text-white" style="opacity:0.7">Transformez</span>
                     <span class="line-2 text-gradient">votre digital</span>
@@ -2308,6 +2315,7 @@
             <div class="logo-item"><img src="logos/stg-energy.svg" alt="STG Energy" height="40"></div>
             <div class="logo-item"><img src="logos/buzzbeauty.svg" alt="BuzzBeauty.ch" height="40"></div>
             <div class="logo-item"><img src="logos/proconcept.svg" alt="Proconcept ERP" height="40"></div>
+            <div class="logo-item"><img src="logos/plastrub.svg" alt="Plastrub SA" height="40"></div>
             <!-- Certifications -->
             <div class="logo-item"><img src="logos/klaviyo-badge.svg" alt="Klaviyo Partner" height="40"></div>
             <div class="logo-item"><img src="logos/shopify-badge.svg" alt="Shopify Partner" height="40"></div>
@@ -2318,6 +2326,7 @@
             <div class="logo-item"><img src="logos/stg-energy.svg" alt="STG Energy" height="40"></div>
             <div class="logo-item"><img src="logos/buzzbeauty.svg" alt="BuzzBeauty.ch" height="40"></div>
             <div class="logo-item"><img src="logos/proconcept.svg" alt="Proconcept ERP" height="40"></div>
+            <div class="logo-item"><img src="logos/plastrub.svg" alt="Plastrub SA" height="40"></div>
             <div class="logo-item"><img src="logos/klaviyo-badge.svg" alt="Klaviyo Partner" height="40"></div>
             <div class="logo-item"><img src="logos/shopify-badge.svg" alt="Shopify Partner" height="40"></div>
             <div class="logo-item"><img src="logos/google-ads-badge.svg" alt="Google Ads Certified" height="40"></div>
@@ -2844,22 +2853,22 @@
 
             <div class="testimonial-grid">
                 <div class="testimonial-card reveal">
-                    <p class="testimonial-text">Sonia a compris notre réalité terrain dès le premier rendez-vous. En 3 mois, nous sommes passés de 100% bouche-à-oreille à un flux régulier de demandes via Google. Le ROI est mesurable chaque semaine.</p>
+                    <p class="testimonial-text">Sonia a développé notre plateforme de réservation bien-être avec une vision claire du parcours utilisateur. Grâce à son travail, nos partenaires beauté reçoivent des réservations régulières et nos clients profitent d'offres attractives.</p>
                     <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Proxima Construction" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--coral-glow)">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Buzz Beauty" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--coral-glow)">
                         <div>
-                            <div class="testimonial-name">Proxima Construction</div>
-                            <div class="testimonial-role">Toiture · Façades · Menuiserie — Grand Genève</div>
+                            <div class="testimonial-name">Buzz Beauty</div>
+                            <div class="testimonial-role">Plateforme digitale bien-être & beauté</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card reveal">
-                    <p class="testimonial-text">Même mission que ce que vous cherchez : visibilité locale, contenu, présence digitale qui génère des contacts. Le travail est rigoureux et les résultats suivent.</p>
+                    <p class="testimonial-text">Sonia a su s'intégrer rapidement dans notre équipe et faire preuve d'initiative et de dynamisme. Une personne de confiance, ponctuelle et consciencieuse, appréciée de l'ensemble de ses collègues et supérieurs.</p>
                     <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="ABC Swisstech" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--blue-glow)">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Sandoz Fils SA" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--blue-glow)">
                         <div>
-                            <div class="testimonial-name">ABC Swisstech</div>
-                            <div class="testimonial-role">Industrie — France</div>
+                            <div class="testimonial-name">Sandoz Fils SA</div>
+                            <div class="testimonial-role">Industrie — Suisse</div>
                         </div>
                     </div>
                 </div>
@@ -2870,6 +2879,16 @@
                         <div>
                             <div class="testimonial-name">Flow & Glow</div>
                             <div class="testimonial-role">E-commerce beauté — Marché anglophone</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <p class="testimonial-text">Sonia se distingue par sa détermination à atteindre les objectifs fixés. Son engagement et sa rigueur dans l'exécution apportent une vraie valeur ajoutée aux projets qu'elle accompagne.</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&crop=face" alt="Juracime SA" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)">
+                        <div>
+                            <div class="testimonial-name">Juracime SA</div>
+                            <div class="testimonial-role">Industrie — Suisse</div>
                         </div>
                     </div>
                 </div>
@@ -3086,7 +3105,7 @@
                     <i data-lucide="chevron-down" style="width:20px;height:20px"></i>
                 </button>
                 <div class="faq-answer">
-                    <div class="faq-answer-inner">Mon ancrage est en Suisse romande et sur la frontière franco-suisse, mais je travaille aussi avec des clients en France (ABC Swisstech) et à l'international pour l'axe e-commerce (marques anglophones). L'important est d'avoir un projet aligné avec mon expertise.</div>
+                    <div class="faq-answer-inner">Mon ancrage est en Suisse romande et sur la frontière franco-suisse, mais je travaille aussi avec des clients en France (Sandoz Fils SA) et à l'international pour l'axe e-commerce (marques anglophones). L'important est d'avoir un projet aligné avec mon expertise.</div>
                 </div>
             </div>
             <div class="faq-item">
@@ -3910,6 +3929,72 @@
         }
         return false;
     }
+    </script>
+
+    <script>
+    // Testimonial horizontal scroll on hover + drag
+    document.addEventListener('DOMContentLoaded', function() {
+        const grid = document.querySelector('.testimonial-grid');
+        if (!grid) return;
+        
+        let scrollSpeed = 0;
+        let animId = null;
+        let isDragging = false;
+        let startX, scrollLeft;
+        
+        // Auto-scroll on hover (desktop)
+        grid.addEventListener('mouseenter', function(e) {
+            updateScroll(e);
+        });
+        
+        grid.addEventListener('mousemove', function(e) {
+            if (isDragging) return;
+            updateScroll(e);
+        });
+        
+        grid.addEventListener('mouseleave', function() {
+            scrollSpeed = 0;
+            if (animId) cancelAnimationFrame(animId);
+        });
+        
+        function updateScroll(e) {
+            const rect = grid.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const pct = x / rect.width;
+            if (pct < 0.25) scrollSpeed = -2;
+            else if (pct > 0.75) scrollSpeed = 2;
+            else scrollSpeed = 0;
+            
+            if (scrollSpeed !== 0 && !animId) animate();
+        }
+        
+        function animate() {
+            if (scrollSpeed === 0) { animId = null; return; }
+            grid.scrollLeft += scrollSpeed;
+            animId = requestAnimationFrame(animate);
+        }
+        
+        // Drag to scroll (mobile + desktop)
+        grid.addEventListener('mousedown', function(e) {
+            isDragging = true; startX = e.pageX - grid.offsetLeft; scrollLeft = grid.scrollLeft;
+            grid.style.cursor = 'grabbing';
+        });
+        grid.addEventListener('mouseleave', function() { isDragging = false; grid.style.cursor = 'grab'; });
+        grid.addEventListener('mouseup', function() { isDragging = false; grid.style.cursor = 'grab'; });
+        grid.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            grid.scrollLeft = scrollLeft - (e.pageX - grid.offsetLeft - startX);
+        });
+        
+        // Touch drag for mobile
+        grid.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].pageX - grid.offsetLeft; scrollLeft = grid.scrollLeft;
+        }, {passive: true});
+        grid.addEventListener('touchmove', function(e) {
+            grid.scrollLeft = scrollLeft - (e.touches[0].pageX - grid.offsetLeft - startX);
+        }, {passive: true});
+    });
     </script>
 </body>
 </html>

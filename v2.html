@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayke Solutions V2 — Marketing Digital & Acquisition de Leads</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy:        #1a2744;
+            --navy-deep:   #0f1a2e;
+            --navy-light:  #243352;
+            --blue:        #1565C0;
+            --blue-light:  #1e88e5;
+            --coral:       #e8845c;
+            --coral-dark:  #d6734b;
+            --teal:        #2ec4b6;
+            --white:       #ffffff;
+            --off-white:   #f8f9fc;
+            --gray-300:    #c9cfd9;
+            --gray-500:    #7a839b;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--navy-deep); color: var(--white); }
+
+        /* ============================================================
+           NAVBAR
+        ============================================================ */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 0 2rem;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 26, 46, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15,26,46,0.6) 0%, transparent 100%);
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .navbar.scrolled::before { opacity: 0; }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-logo-mark {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--coral) 0%, var(--coral-dark) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(232,132,92,0.35);
+        }
+
+        .nav-logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.5px;
+        }
+        .nav-logo-text span { color: var(--coral); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.75);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0; right: 0;
+            height: 2px;
+            background: var(--coral);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transition: transform 0.25s ease;
+        }
+
+        .nav-links a:hover { color: var(--white); }
+        .nav-links a:hover::after { transform: scaleX(1); }
+
+        .nav-cta {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-nav-ghost {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            padding: 0.5rem 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s, background 0.2s;
+        }
+        .btn-nav-ghost:hover {
+            border-color: rgba(255,255,255,0.5);
+            color: var(--white);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .btn-nav-primary {
+            background: linear-gradient(135deg, var(--coral) 0%, var(--coral-dark) 100%);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(232,132,92,0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-nav-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(232,132,92,0.5);
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            padding: 4px;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links, .btn-nav-ghost { display: none; }
+            .nav-hamburger { display: flex; }
+        }
+
+        /* ============================================================
+           HERO SECTION
+        ============================================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f1a2e 0%, #1a2744 45%, #1e3a5f 100%);
+            padding: 120px 2rem 80px;
+        }
+
+        /* Mesh gradient blobs */
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            animation: blobFloat 8s ease-in-out infinite;
+        }
+        .hero-blob-1 {
+            width: 600px; height: 600px;
+            background: rgba(21,101,192,0.12);
+            top: -150px; left: -100px;
+            animation-delay: 0s;
+        }
+        .hero-blob-2 {
+            width: 500px; height: 500px;
+            background: rgba(232,132,92,0.08);
+            top: 100px; right: -80px;
+            animation-delay: -3s;
+        }
+        .hero-blob-3 {
+            width: 400px; height: 400px;
+            background: rgba(46,196,182,0.07);
+            bottom: -100px; left: 40%;
+            animation-delay: -6s;
+        }
+
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33%       { transform: translate(20px, -30px) scale(1.05); }
+            66%       { transform: translate(-15px, 20px) scale(0.97); }
+        }
+
+        /* Grid dots */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        /* Decorative line */
+        .hero-line {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(232,132,92,0.4), transparent);
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(46,196,182,0.1);
+            border: 1px solid rgba(46,196,182,0.25);
+            color: var(--teal);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .hero-badge-dot {
+            width: 6px; height: 6px;
+            background: var(--teal);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .hero-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+        .hero-headline em {
+            font-style: italic;
+            color: var(--coral);
+        }
+        .hero-headline .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        .hero-headline .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--coral), var(--teal));
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+
+        .hero-subtitle {
+            font-size: 1.0625rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.7;
+            max-width: 520px;
+            margin-bottom: 2.5rem;
+        }
+        .hero-subtitle strong {
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--coral) 0%, var(--coral-dark) 100%);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(232,132,92,0.4);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(232,132,92,0.55);
+        }
+        .btn-primary svg { width: 18px; height: 18px; }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.85);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            padding: 0.875rem 1.75rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.12);
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.25s;
+            backdrop-filter: blur(8px);
+        }
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.25);
+            color: var(--white);
+            transform: translateY(-1px);
+        }
+        .btn-ghost svg { width: 18px; height: 18px; }
+
+        .hero-trust {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-trust-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hero-trust-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            flex-wrap: wrap;
+        }
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.65);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 6px;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .trust-badge:hover {
+            border-color: rgba(255,255,255,0.2);
+            color: var(--white);
+        }
+        .trust-badge-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+        }
+        .trust-badge-dot.klaviyo { background: #00C389; }
+        .trust-badge-dot.google  { background: #4285F4; }
+        .trust-badge-dot.shopify { background: #96BF48; }
+
+        /* Hero card (right column) */
+        .hero-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+        }
+
+        .hero-card-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--coral);
+            margin-bottom: 1rem;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero-stat {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hero-stat-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--white);
+            display: block;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .hero-stat-value.coral { color: var(--coral); }
+        .hero-stat-value.teal  { color: var(--teal); }
+        .hero-stat-label {
+            font-size: 0.6875rem;
+            color: rgba(255,255,255,0.45);
+            font-weight: 500;
+        }
+
+        .hero-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .hero-timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .timeline-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+        .timeline-dot.coral  { background: var(--coral); box-shadow: 0 0 8px rgba(232,132,92,0.5); }
+        .timeline-dot.blue   { background: var(--blue-light); box-shadow: 0 0 8px rgba(30,136,229,0.5); }
+        .timeline-dot.teal   { background: var(--teal); box-shadow: 0 0 8px rgba(46,196,182,0.5); }
+        .timeline-text {
+            font-size: 0.8125rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.4;
+        }
+        .timeline-text strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-inner { grid-template-columns: 1fr; }
+            .hero-card { display: none; }
+        }
+        @media (max-width: 640px) {
+            .hero { padding: 100px 1.25rem 60px; }
+            .hero-actions { flex-direction: column; align-items: flex-start; }
+            .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+        }
+
+        /* ============================================================
+           CTA SECTION
+        ============================================================ */
+        .cta-section {
+            position: relative;
+            overflow: hidden;
+            padding: 100px 2rem;
+            background: linear-gradient(135deg, var(--coral) 0%, #c75f3a 100%);
+        }
+
+        /* Decorative geometric shapes */
+        .cta-geo {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.12;
+        }
+        .cta-geo-1 {
+            width: 400px; height: 400px;
+            border: 2px solid white;
+            border-radius: 50%;
+            top: -150px; right: -100px;
+        }
+        .cta-geo-2 {
+            width: 250px; height: 250px;
+            border: 2px solid white;
+            border-radius: 50%;
+            bottom: -80px; left: -60px;
+        }
+        .cta-geo-3 {
+            width: 120px; height: 120px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 24px;
+            transform: rotate(30deg);
+            top: 40px; left: 12%;
+        }
+        .cta-geo-4 {
+            width: 60px; height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            transform: rotate(-15deg);
+            bottom: 60px; right: 15%;
+        }
+
+        /* Noise texture overlay */
+        .cta-noise {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            pointer-events: none;
+        }
+
+        .cta-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-eyebrow {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 1.25rem;
+        }
+
+        .cta-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4.5vw, 3.25rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+        }
+        .cta-headline em {
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .cta-subtitle {
+            font-size: 1.0625rem;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.65;
+            margin-bottom: 2.5rem;
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--white);
+            color: var(--coral-dark);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 1rem 2.25rem;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.12);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.2s;
+        }
+        .btn-cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.25), 0 4px 16px rgba(0,0,0,0.15);
+            background: #fff8f6;
+        }
+        .btn-cta-primary svg { width: 20px; height: 20px; }
+
+        .btn-cta-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            padding: 1rem 1.75rem;
+            border-radius: 14px;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.25s, border-color 0.25s, transform 0.25s;
+            backdrop-filter: blur(8px);
+        }
+        .btn-cta-ghost:hover {
+            background: rgba(255,255,255,0.18);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-2px);
+        }
+
+        .cta-reassurance {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .cta-reassurance-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8125rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+        }
+        .cta-reassurance-item svg {
+            width: 15px; height: 15px;
+            color: rgba(255,255,255,0.9);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 640px) {
+            .cta-section { padding: 72px 1.25rem; }
+            .cta-actions { flex-direction: column; }
+            .btn-cta-primary, .btn-cta-ghost { width: 100%; justify-content: center; }
+        }
+
+        /* ============================================================
+           DEMO SPACER
+        ============================================================ */
+        .spacer {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111827;
+            color: rgba(255,255,255,0.2);
+            font-size: 0.875rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         COMPOSANT 1 : NAVBAR
+    ============================================================ -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-mark">AS</div>
+            <span class="nav-logo-text">Ayke <span>Solutions</span></span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#resultats">Résultats</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-cta">
+            <a href="#contact" class="btn-nav-ghost">Se connecter</a>
+            <a href="#audit" class="btn-nav-primary">Audit Gratuit →</a>
+        </div>
+
+        <div class="nav-hamburger" id="navHamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+
+    <!-- ============================================================
+         COMPOSANT 2 : HERO SECTION
+    ============================================================ -->
+    <section class="hero" id="hero">
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
+        <div class="hero-blob hero-blob-3"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-line"></div>
+
+        <div class="hero-inner">
+            <!-- Left: Content -->
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Agence Marketing Digital — Suisse &amp; France
+                </div>
+
+                <h1 class="hero-headline">
+                    Transformez votre présence en<br>
+                    <em>machine à <span class="highlight">prospects</span></em>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Stratégie sur-mesure pour <strong>PME locales</strong> et email marketing
+                    <strong>Klaviyo</strong> pour e-commerce DTC/DNVB. Premiers leads
+                    qualifiés sous <strong>30 jours</strong>.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#audit" class="btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                        Démarrer mon audit gratuit
+                    </a>
+                    <a href="#resultats" class="btn-ghost">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                        Voir les résultats
+                    </a>
+                </div>
+
+                <div class="hero-trust">
+                    <span class="hero-trust-label">Certifié</span>
+                    <div class="hero-trust-badges">
+                        <span class="trust-badge">
+                            <span class="trust-badge-dot klaviyo"></span>
+                            Klaviyo Partner
+                        </span>
+                        <span class="trust-badge">
+                            <span class="trust-badge-dot google"></span>
+                            Google Ads
+                        </span>
+                        <span class="trust-badge">
+                            <span class="trust-badge-dot shopify"></span>
+                            Shopify Expert
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Stats card -->
+            <div class="hero-card">
+                <p class="hero-card-title">Résultats clients</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-value coral">+25%</span>
+                        <span class="hero-stat-label">CA attribuable email</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value teal">30j</span>
+                        <span class="hero-stat-label">Premiers leads</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">10j</span>
+                        <span class="hero-stat-label">Premiers résultats</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value coral">100%</span>
+                        <span class="hero-stat-label">Vos assets, votre propriété</span>
+                    </div>
+                </div>
+
+                <div class="hero-timeline">
+                    <div class="hero-timeline-item">
+                        <span class="timeline-dot coral"></span>
+                        <span class="timeline-text"><strong>Jour 1–7 :</strong> Audit, stratégie &amp; setup complet</span>
+                    </div>
+                    <div class="hero-timeline-item">
+                        <span class="timeline-dot blue"></span>
+                        <span class="timeline-text"><strong>Jour 10–14 :</strong> Premiers indicateurs positifs</span>
+                    </div>
+                    <div class="hero-timeline-item">
+                        <span class="timeline-dot teal"></span>
+                        <span class="timeline-text"><strong>Jour 30 :</strong> Leads qualifiés ou revenus email mesurables</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Spacer simulant le contenu intermédiaire -->
+    <div class="spacer">— Contenu de la page —</div>
+
+
+    <!-- ============================================================
+         COMPOSANT 3 : CTA SECTION
+    ============================================================ -->
+    <section class="cta-section" id="audit">
+        <div class="cta-geo cta-geo-1"></div>
+        <div class="cta-geo cta-geo-2"></div>
+        <div class="cta-geo cta-geo-3"></div>
+        <div class="cta-geo cta-geo-4"></div>
+        <div class="cta-noise"></div>
+
+        <div class="cta-inner">
+            <span class="cta-eyebrow">Prêt à passer à l'action ?</span>
+
+            <h2 class="cta-headline">
+                Votre prochaine <em>machine à prospects</em><br>
+                commence aujourd'hui
+            </h2>
+
+            <p class="cta-subtitle">
+                Un audit gratuit de 30 minutes pour identifier vos opportunités
+                exactes. Pas de discours générique — uniquement ce qui fonctionne
+                pour <strong>votre</strong> activité.
+            </p>
+
+            <div class="cta-actions">
+                <a href="mailto:contact@ayke-solutions.com" class="btn-cta-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    Réserver mon audit gratuit
+                </a>
+                <a href="mailto:contact@ayke-solutions.com" class="btn-cta-ghost">
+                    Me contacter d'abord →
+                </a>
+            </div>
+
+            <div class="cta-reassurance">
+                <span class="cta-reassurance-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Audit 100% gratuit
+                </span>
+                <span class="cta-reassurance-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Sans engagement
+                </span>
+                <span class="cta-reassurance-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Résultats sous 30 jours
+                </span>
+                <span class="cta-reassurance-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Vos assets vous appartiennent
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+        }, { passive: true });
+
+        // Mobile hamburger (basic toggle)
+        document.getElementById('navHamburger').addEventListener('click', () => {
+            alert('Menu mobile — à connecter à votre implémentation mobile nav.');
+        });
+    </script>
+</body>
+</html>

@@ -531,7 +531,11 @@
         /* Panneau visuel droite */
         .hero-visual-panel {
             position: relative;
-            display: flex; flex-direction: column; gap: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 16px;
+            align-content: center;
         }
         .hero-metric-card {
             background: rgba(255,255,255,0.035);
@@ -543,7 +547,7 @@
         }
         .hero-metric-card:hover {
             border-color: rgba(255,255,255,0.13);
-            transform: translateX(6px);
+            transform: translateY(-4px);
         }
         .hero-metric-card::before {
             content: ''; position: absolute;
@@ -569,16 +573,28 @@
         .metric-sublabel {
             font-size: 0.72rem; color: rgba(255,255,255,0.28); margin-top: 3px;
         }
-        /* Portrait mini */
+        /* Portrait grand dans le hero */
         .hero-portrait-ring {
-            position: absolute; top: -44px; right: -12px;
-            width: 96px; height: 96px; border-radius: 50%;
-            border: 2px solid rgba(255,90,44,0.25);
-            display: flex; align-items: center; justify-content: center; z-index: 2;
-            box-shadow: 0 0 24px rgba(255,90,44,0.15);
+            grid-column: 1 / -1;
+            width: 200px; height: 200px; border-radius: 50%;
+            border: 3px solid rgba(255,90,44,0.35);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2;
+            box-shadow: 0 0 40px rgba(255,90,44,0.2), 0 0 80px rgba(255,90,44,0.08);
+            margin: 0 auto 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-portrait-ring::before {
+            content: ''; position: absolute; inset: -3px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--v2-coral), var(--v2-blue), var(--v2-teal), var(--v2-coral));
+            z-index: -1;
+            animation: spinSlow 12s linear infinite;
+            opacity: 0.5;
         }
         .hero-portrait-ring img {
-            width: 80px; height: 80px; border-radius: 50%;
+            width: 100%; height: 100%; border-radius: 50%;
             object-fit: cover; object-position: center top;
         }
         /* Orbe teal déco bas-droite */
@@ -2901,14 +2917,14 @@
                     </div>
                 </div>
 
-                <!-- DROITE : cartes métriques flottantes -->
+                <!-- DROITE : portrait + cartes métriques -->
                 <div class="hero-visual-panel">
                     <div class="hero-portrait-ring">
                         <img src="portrait.png" alt="Sonia CATIC"
-                             fetchpriority="high" onerror="this.style.display='none'">
+                             fetchpriority="high" onerror="this.parentElement.style.display='none'">
                     </div>
 
-                    <div class="hero-metric-card coral" style="margin-top:60px;animation:cardFloat1 6s ease-in-out infinite">
+                    <div class="hero-metric-card coral" style="animation:cardFloat1 6s ease-in-out infinite">
                         <div class="metric-number hero-counter" data-target="340" data-prefix="+" data-suffix="%">0</div>
                         <div class="metric-label">Leads qualifiés générés</div>
                         <div class="metric-sublabel">PME · Google Ads + GBP</div>
@@ -2920,7 +2936,7 @@
                         <div class="metric-sublabel">E-commerce · Klaviyo flows</div>
                     </div>
 
-                    <div class="hero-metric-card teal" style="animation:cardFloat3 7s ease-in-out infinite 1s">
+                    <div class="hero-metric-card teal" style="grid-column:1 / -1;animation:cardFloat3 7s ease-in-out infinite 1s">
                         <div class="metric-number hero-counter" data-target="14" data-prefix="" data-suffix="j">0</div>
                         <div class="metric-label">Premiers résultats concrets</div>
                         <div class="metric-sublabel">Dès le lancement de la stratégie</div>

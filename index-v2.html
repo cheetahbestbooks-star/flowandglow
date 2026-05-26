@@ -600,6 +600,11 @@
             50% { transform: translateY(-6px); }
         }
         /* Responsive hero */
+        /* desktop: hide mobile-only elements */
+        .hero-sub-mobile   { display: none; }
+        .hero-proof-mobile { display: none; }
+        .btn-label-mobile  { display: none; }
+
         @media (max-width: 968px) {
             .hero-layout { grid-template-columns: 1fr; gap: 40px; }
             .hero-visual-panel { display: none; }
@@ -611,10 +616,37 @@
             .hero-v2-proof { justify-content: center; }
         }
         @media (max-width: 640px) {
-            .hero { padding: 100px 0 60px; min-height: auto; }
-            .hero-v2-title { font-size: clamp(2rem, 9vw, 3rem); letter-spacing: -0.5px; }
-            .hero-v2-ctas { flex-direction: column; width: 100%; gap: 12px; }
-            .btn-v2-primary { width: 100%; justify-content: center; }
+            /* Layout */
+            .hero { padding: 88px 0 48px; min-height: auto; }
+            .hero-layout { gap: 0; }
+
+            /* Eyebrow — caché sur mobile */
+            .hero-eyebrow { display: none; }
+
+            /* Titre — plus compact */
+            .hero-v2-title {
+                font-size: clamp(2.6rem, 11vw, 3.2rem);
+                letter-spacing: -1px;
+                margin-bottom: 16px;
+                text-align: center;
+            }
+
+            /* Swap subtitles */
+            .hero-sub-desktop  { display: none; }
+            .hero-sub-mobile   { display: block; text-align: center; font-size: 1rem; margin-bottom: 28px; max-width: 100%; }
+
+            /* CTAs */
+            .hero-v2-ctas { flex-direction: column; align-items: center; gap: 10px; margin-bottom: 24px; width: 100%; }
+            .btn-v2-primary { width: 100%; justify-content: center; padding: 16px 20px; font-size: 0.95rem; }
+            .btn-label-desktop { display: none; }
+            .btn-label-mobile  { display: inline; }
+
+            /* Ghost link — plus petit, centré */
+            .hero-ghost-link { font-size: 0.82rem; justify-content: center; }
+
+            /* Swap proof */
+            .hero-proof-desktop { display: none; }
+            .hero-proof-mobile  { display: flex; justify-content: center; font-size: 0.78rem; }
         }
 
         /* --- CREATIVE PHOTO FRAMES --- */
@@ -2794,24 +2826,36 @@
                         <span class="line-bold">vos <span class="word-gradient">clients.</span></span>
                     </h1>
 
-                    <p class="hero-v2-sub">
+                    <!-- Desktop subtitle (masqué mobile) -->
+                    <p class="hero-v2-sub hero-sub-desktop">
                         Stratégie sur-mesure pour <strong>PME locales</strong> et <strong>e-commerce</strong> — leads qualifiés, email Klaviyo, automatisation IA. Résultats mesurables en 90 jours.
+                    </p>
+                    <!-- Mobile subtitle (1 ligne, masqué desktop) -->
+                    <p class="hero-v2-sub hero-sub-mobile">
+                        Marketing digital pour <strong>PME &amp; e-commerce</strong>.
                     </p>
 
                     <div class="hero-v2-ctas">
                         <a href="#" onclick="openCalendly(event)" class="btn-v2-primary">
                             <i data-lucide="calendar" style="width:18px;height:18px"></i>
-                            Réserver un appel découverte
+                            <span class="btn-label-desktop">Réserver un appel découverte</span>
+                            <span class="btn-label-mobile">Audit gratuit</span>
                         </a>
-                        <a href="#services" class="btn-v2-ghost">
+                        <a href="#services" class="btn-v2-ghost hero-ghost-link">
                             Découvrir les offres
                             <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
                         </a>
                     </div>
 
-                    <div class="hero-v2-proof">
+                    <!-- Desktop proof (masqué mobile) -->
+                    <div class="hero-v2-proof hero-proof-desktop">
                         <span class="hero-v2-proof-dot"></span>
                         47+ clients accompagnés · France &amp; Suisse romande · Résultats en 90 jours
+                    </div>
+                    <!-- Mobile proof (masqué desktop) -->
+                    <div class="hero-v2-proof hero-proof-mobile">
+                        <span class="hero-v2-proof-dot"></span>
+                        47+ clients · FR &amp; CH
                     </div>
                 </div>
 

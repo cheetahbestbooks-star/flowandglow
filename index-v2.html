@@ -2451,7 +2451,99 @@
            V2 OVERRIDES — DARK PREMIUM PALETTE FOR ALL SECTIONS
            ================================================================ */
 
-        /* --- Trust Bar --- */
+        /* ---- 1. CSS VARIABLE NUCLEAR OVERRIDE ---- */
+        :root {
+            --navy:     rgba(255,255,255,0.90);
+            --gray-900: rgba(255,255,255,0.88);
+            --gray-700: rgba(255,255,255,0.55);
+            --gray-500: rgba(255,255,255,0.38);
+            --gray-300: rgba(255,255,255,0.12);
+            --gray-200: rgba(255,255,255,0.08);
+            --gray-100: rgba(255,255,255,0.05);
+            --white:    #030c1a;
+            --off-white: #071020;
+            --coral:    #ff5a2c;
+            --coral-light: #ff7a4e;
+            --coral-lighter: #ffa07a;
+            --coral-dark: #e84a1a;
+            --coral-glow: rgba(255,90,44,0.14);
+            --coral-pale: rgba(255,90,44,0.06);
+            --blue:     #0ea5e9;
+            --blue-light: #38bdf8;
+            --blue-lighter: #7dd3fc;
+            --blue-dark: #0284c7;
+            --blue-glow: rgba(14,165,233,0.14);
+            --blue-pale: rgba(14,165,233,0.06);
+            --teal:     #00ffd4;
+            --teal-light: #40ffe0;
+            --teal-lighter: #80ffe9;
+            --teal-dark: #00ccaa;
+            --teal-glow: rgba(0,255,212,0.10);
+            --teal-pale: rgba(0,255,212,0.05);
+            --gold:     #fbbf24;
+            --gold-glow: rgba(251,191,36,0.14);
+            --gradient-cta: linear-gradient(135deg, #ff5a2c 0%, #e84a1a 100%);
+            --gradient-blue: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            --gradient-teal: linear-gradient(135deg, #00ffd4 0%, #00ccaa 100%);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.35);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+            --shadow-xl: 0 16px 48px rgba(0,0,0,0.45);
+        }
+
+        /* ---- 2. BODY ---- */
+        body { background: var(--v2-bg) !important; color: rgba(255,255,255,0.85) !important; }
+        h2.section-title { color: rgba(255,255,255,0.92) !important; }
+        .section-subtitle { color: rgba(255,255,255,0.45) !important; }
+
+        /* Subtle noise grain overlay */
+        body::before {
+            content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.35;
+        }
+        @media (max-width: 968px) { body::before { display: none; } }
+
+        /* ---- 3. GLOBAL ELEMENTS ---- */
+        .btn-outline {
+            color: rgba(255,255,255,0.7) !important;
+            border-color: rgba(255,255,255,0.18) !important;
+            background: transparent !important;
+        }
+        .btn-outline:hover {
+            color: var(--v2-coral) !important;
+            border-color: var(--v2-coral) !important;
+            background: rgba(255,90,44,0.06) !important;
+        }
+        .section-label-coral { color: var(--v2-coral) !important; }
+        .section-label-blue  { color: var(--v2-blue) !important; }
+        .badge-coral  { background: rgba(255,90,44,0.12) !important; color: var(--v2-coral) !important; }
+        .badge-blue   { background: rgba(14,165,233,0.12) !important; color: var(--v2-blue) !important; }
+        .badge-teal   { background: rgba(0,255,212,0.10) !important; color: var(--v2-teal) !important; }
+        .badge-white  { background: rgba(255,255,255,0.10) !important; color: rgba(255,255,255,0.85) !important; }
+        .highlight-coral { color: var(--v2-coral) !important; }
+        .highlight-blue  { color: var(--v2-blue) !important; }
+        .photo-caption { color: rgba(255,255,255,0.2) !important; }
+        .photo-frame { box-shadow: 0 8px 30px rgba(0,0,0,0.5) !important; }
+        .section-decor { display: none !important; }
+        .wave-divider { display: none !important; }
+        .section-light { background: #071020 !important; }
+        .section-dark  { background: #030c1a !important; }
+        section + section { border-top: 1px solid rgba(255,255,255,0.04); }
+        .hero + * { border-top: none; }
+
+        /* ---- 4. SECTION BACKGROUNDS (bypass inline style="background:...") ---- */
+        #probleme    { background: #04101f !important; }
+        #services    { background: #030c1a !important; }
+        #methode     { background: #071020 !important; }
+        #resultats   { background: #04101f !important; }
+        #temoignages { background: #030c1a !important; }
+        #ressources  { background: #071020 !important; }
+        #a-propos    { background: #04101f !important; }
+        #faq         { background: #030c1a !important; }
+        #contact     { background: #071020 !important; }
+
+        /* ---- 5. TRUST BAR ---- */
         .trust-bar {
             background: #071020 !important;
             padding: 36px 0 !important;
@@ -2471,286 +2563,167 @@
         }
         .trust-item i { color: var(--v2-teal) !important; }
 
-        /* --- Logo Carousel --- */
+        /* ---- 6. LOGO CAROUSEL ---- */
         .logo-carousel {
             background: #04101f !important;
             border-top: none !important;
             border-bottom: 1px solid rgba(255,255,255,0.04) !important;
         }
         .logo-carousel-label { color: rgba(255,255,255,0.2) !important; }
-        .logo-item img { filter: brightness(0) invert(1); opacity: 0.3; transition: opacity 0.3s; }
-        .logo-item:hover img { opacity: 0.65; }
+        .logo-item img { filter: brightness(0) invert(1); opacity: 0.28; transition: opacity 0.3s; }
+        .logo-item:hover img { opacity: 0.6; }
         .logo-item { opacity: 1 !important; }
 
-        /* --- Problems Section --- */
-        .problems {
-            background: #04101f !important;
-        }
-        .problems .section-subtitle { color: rgba(255,255,255,0.45) !important; }
-        .problems .text-navy { color: rgba(255,255,255,0.9) !important; }
-        .problems .text-coral { color: var(--v2-coral) !important; }
-        .problems .stacked-title .line-1 { opacity: 1 !important; }
+        /* ---- 7. PROBLEMS ---- */
         .problem-card {
             background: rgba(255,255,255,0.04) !important;
             border: 1px solid rgba(255,255,255,0.06) !important;
             border-left: 3px solid var(--v2-coral) !important;
         }
-        .problem-card:hover {
-            background: rgba(255,255,255,0.07) !important;
-            box-shadow: none !important;
-        }
+        .problem-card:hover { background: rgba(255,255,255,0.07) !important; box-shadow: none !important; }
         .problem-card::before { display: none !important; }
         .problem-card h4 { color: rgba(255,255,255,0.88) !important; }
-        .problem-card p { color: rgba(255,255,255,0.42) !important; }
+        .problem-card p   { color: rgba(255,255,255,0.42) !important; }
         .solution-preview {
             background: rgba(255,90,44,0.07) !important;
             border: 1px solid rgba(255,90,44,0.18) !important;
         }
-        .solution-preview h3 { color: white !important; }
-        .solution-preview p { color: rgba(255,255,255,0.55) !important; }
-        .solution-check span { color: rgba(255,255,255,0.8) !important; }
-        .solution-check i { color: var(--v2-teal) !important; }
-        .solution-preview .btn-primary {
-            background: var(--v2-coral) !important;
-            box-shadow: 0 0 24px rgba(255,90,44,0.3), 0 4px 12px rgba(255,90,44,0.15) !important;
-        }
-        /* Hide decorative blobs in problems */
-        .problems .section-decor { display: none !important; }
-        /* Hide the photo block in problems (too noisy on dark) */
-        .problems .photo-frame-wrapper,
-        .problems .reveal-right > p { display: none !important; }
-        .problems > .container > div[style*="display:flex"] { display: none !important; }
+        .solution-preview h3 { color: rgba(255,255,255,0.9) !important; }
+        .solution-preview p  { color: rgba(255,255,255,0.55) !important; }
+        .solution-check span { color: rgba(255,255,255,0.80) !important; }
+        .solution-check i    { color: var(--v2-teal) !important; }
+        .solution-preview .btn-primary { background: var(--v2-coral) !important; box-shadow: 0 0 24px rgba(255,90,44,0.3) !important; }
 
-        /* --- Services / Axes --- */
-        .axes { background: #030c1a !important; }
-        .axes .section-label-coral { color: var(--v2-coral) !important; }
-        .axes .section-label-blue { color: var(--v2-blue) !important; }
-        .axes .text-navy { color: rgba(255,255,255,0.9) !important; }
-        .axes .text-coral { color: var(--v2-coral) !important; }
-        .axes .text-blue { color: var(--v2-blue) !important; }
-        .axes .section-subtitle { color: rgba(255,255,255,0.45) !important; }
-        /* Tabs toggle */
+        /* ---- 8. SERVICES / AXES ---- */
         .axes-tabs .tab-btn {
             background: rgba(255,255,255,0.05) !important;
             border-color: rgba(255,255,255,0.08) !important;
             color: rgba(255,255,255,0.55) !important;
         }
-        .axes-tabs .tab-btn.active {
-            background: var(--v2-coral) !important;
-            border-color: var(--v2-coral) !important;
-            color: white !important;
-        }
-        /* Offer cards in services */
-        .offer-card {
-            background: rgba(255,255,255,0.04) !important;
-            border-color: rgba(255,255,255,0.08) !important;
-        }
-        .offer-card:hover { border-color: rgba(255,90,44,0.25) !important; }
-        .offer-card h3, .offer-card .offer-name { color: rgba(255,255,255,0.9) !important; }
-        .offer-card .offer-price, .offer-price-main { color: var(--v2-coral) !important; }
-        .offer-card li, .offer-feature { color: rgba(255,255,255,0.55) !important; }
-        .offer-card .offer-cta { background: var(--v2-coral) !important; }
-        /* Service cards */
-        .service-card {
-            background: rgba(255,255,255,0.04) !important;
-            border-color: rgba(255,255,255,0.07) !important;
-        }
+        .axes-tabs .tab-btn.active { background: var(--v2-coral) !important; border-color: var(--v2-coral) !important; color: white !important; }
+        .service-card { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.07) !important; }
         .service-card:nth-child(1) { border-top-color: var(--v2-coral) !important; }
         .service-card:nth-child(2) { border-top-color: var(--v2-blue) !important; }
         .service-card:nth-child(3) { border-top-color: var(--v2-teal) !important; }
         .service-card:nth-child(4) { border-top-color: rgba(255,255,255,0.2) !important; }
         .service-card:hover { background: rgba(255,255,255,0.07) !important; box-shadow: none !important; }
         .service-card h4 { color: rgba(255,255,255,0.9) !important; }
-        .service-card p { color: rgba(255,255,255,0.45) !important; }
+        .service-card p  { color: rgba(255,255,255,0.45) !important; }
         .service-card-icon.coral { background: rgba(255,90,44,0.12) !important; color: var(--v2-coral) !important; box-shadow: none !important; }
         .service-card-icon.blue  { background: rgba(14,165,233,0.12) !important; color: var(--v2-blue) !important; box-shadow: none !important; }
-        .service-card-icon.teal  { background: rgba(0,255,212,0.1) !important; color: var(--v2-teal) !important; box-shadow: none !important; }
+        .service-card-icon.teal  { background: rgba(0,255,212,0.10) !important; color: var(--v2-teal) !important; box-shadow: none !important; }
         .service-card-icon.navy  { background: rgba(255,255,255,0.08) !important; color: rgba(255,255,255,0.7) !important; box-shadow: none !important; }
-        /* PME hero card */
-        .pme-hero-card {
-            background: rgba(255,90,44,0.1) !important;
-            border: 1px solid rgba(255,90,44,0.2) !important;
-        }
-        .axes .pme-hero-card p { color: rgba(255,255,255,0.65) !important; }
-        /* Axes header */
-        .axes-header h2, .axes-header .section-title { color: rgba(255,255,255,0.9) !important; }
-        .axes-header .section-subtitle { color: rgba(255,255,255,0.45) !important; }
-        /* Offer tabs section headers */
-        .offers-grid .offer-card { color: rgba(255,255,255,0.85) !important; }
-        .offer-card .offer-period, .offer-card .offer-desc { color: rgba(255,255,255,0.4) !important; }
+        .pme-hero-card { background: rgba(255,90,44,0.09) !important; border: 1px solid rgba(255,90,44,0.18) !important; }
+        .offer-card { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.08) !important; box-shadow: none !important; }
+        .offer-card:hover { border-color: rgba(255,90,44,0.25) !important; }
+        .offer-card h3, .offer-card .offer-name { color: rgba(255,255,255,0.9) !important; }
+        .offer-card .offer-price, .offer-price-main { color: var(--v2-coral) !important; }
+        .offer-card .offer-period, .offer-card .offer-desc { color: rgba(255,255,255,0.38) !important; }
+        .offer-card li, .offer-feature { color: rgba(255,255,255,0.55) !important; }
         .offer-card ul li::before { color: var(--v2-teal) !important; }
-        /* Options block */
-        .axes .axe-content div[style*="var(--off-white)"] {
-            background: rgba(255,255,255,0.04) !important;
-            border-color: rgba(255,255,255,0.1) !important;
-        }
-        .axes .axe-content strong { color: rgba(255,255,255,0.85) !important; }
+        .offer-card .offer-cta, .offer-card .btn-primary { background: var(--v2-coral) !important; box-shadow: 0 0 24px rgba(255,90,44,0.25) !important; }
+        .offer-card .btn-outline { color: rgba(255,255,255,0.7) !important; border-color: rgba(255,255,255,0.2) !important; }
+        .pricing-card { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.07) !important; box-shadow: none !important; }
+        .pricing-card:hover { background: rgba(255,255,255,0.07) !important; box-shadow: none !important; }
+        .pricing-card h4 { color: rgba(255,255,255,0.88) !important; }
+        .pricing-card .price { color: var(--v2-coral) !important; }
+        .pricing-card .price-note { color: rgba(255,255,255,0.38) !important; }
+        .pricing-card .pricing-features li { color: rgba(255,255,255,0.55) !important; }
+        .pricing-card.featured { background: rgba(255,90,44,0.10) !important; border-color: rgba(255,90,44,0.25) !important; }
+        .pricing-card.featured-blue { background: rgba(14,165,233,0.10) !important; border-color: rgba(14,165,233,0.25) !important; }
+        .pricing-card-badge { background: var(--v2-coral) !important; }
+        .pricing-card-badge.blue-badge { background: var(--v2-blue) !important; }
 
-        /* --- Method section --- */
-        .method { background: #071020 !important; }
-        .method .text-navy, .method h2, .method h3 { color: rgba(255,255,255,0.9) !important; }
-        .method .section-subtitle, .method p { color: rgba(255,255,255,0.5) !important; }
-        .method .text-coral { color: var(--v2-coral) !important; }
-        .method .text-teal { color: var(--v2-teal) !important; }
-        .method-step { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.07) !important; }
-        .method-step:hover { background: rgba(255,255,255,0.07) !important; }
-        .method-step-number { color: var(--v2-coral) !important; opacity: 1 !important; }
+        /* ---- 9. METHOD ---- */
+        .method-step { background: rgba(255,255,255,0.05) !important; border-color: rgba(255,255,255,0.08) !important; }
+        .method-step:hover { background: rgba(255,255,255,0.09) !important; box-shadow: 0 16px 40px rgba(0,0,0,0.3) !important; }
+        .method-step-number { background: var(--v2-coral) !important; box-shadow: 0 8px 24px rgba(255,90,44,0.3) !important; }
+        .method-step h4 { color: rgba(255,255,255,0.9) !important; }
+        .method-step p  { color: rgba(255,255,255,0.5) !important; }
 
-        /* --- Results section --- */
-        .results { background: #04101f !important; }
-        .results .text-navy, .results h2, .results h3 { color: rgba(255,255,255,0.9) !important; }
-        .results .section-subtitle, .results p { color: rgba(255,255,255,0.5) !important; }
-        .results .text-coral { color: var(--v2-coral) !important; }
-        .result-card {
-            background: rgba(255,255,255,0.04) !important;
-            border-color: rgba(255,255,255,0.07) !important;
-        }
-        .result-number { color: var(--v2-coral) !important; }
+        /* ---- 10. RESULTS ---- */
+        .result-card { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.07) !important; box-shadow: none !important; }
+        .result-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.4) !important; }
+        .result-label { color: rgba(255,255,255,0.38) !important; }
+        .result-card::after { display: none !important; }
+        #resultats div[style*="color:var(--coral)"] { color: var(--v2-coral) !important; }
+        #resultats div[style*="color:var(--blue)"]  { color: var(--v2-blue) !important; }
+        #resultats div[style*="color:var(--teal)"]  { color: var(--v2-teal) !important; }
 
-        /* --- Testimonials --- */
-        .testimonials {
-            background: #030c1a !important;
-        }
-        .testimonials .text-navy { color: rgba(255,255,255,0.9) !important; }
-        .testimonials .text-blue { color: var(--v2-blue) !important; }
-        .testimonials .section-label-blue { color: var(--v2-blue) !important; }
-        .testimonial-card {
-            background: rgba(255,255,255,0.04) !important;
-            border: 1px solid rgba(255,255,255,0.07) !important;
-            border-bottom: 3px solid var(--v2-coral) !important;
-            box-shadow: none !important;
-        }
+        /* ---- 11. TESTIMONIALS ---- */
+        .testimonial-card { background: rgba(255,255,255,0.04) !important; border: 1px solid rgba(255,255,255,0.07) !important; border-bottom: 3px solid var(--v2-coral) !important; box-shadow: none !important; }
         .testimonial-card:nth-child(2) { border-bottom-color: var(--v2-blue) !important; }
         .testimonial-card:nth-child(3) { border-bottom-color: var(--v2-teal) !important; }
-        .testimonial-card:nth-child(4) { border-bottom-color: rgba(255,90,44,0.5) !important; }
-        .testimonial-card:hover {
-            background: rgba(255,255,255,0.07) !important;
-            border-color: rgba(255,255,255,0.12) !important;
-        }
+        .testimonial-card:nth-child(4) { border-bottom-color: rgba(255,90,44,0.4) !important; }
+        .testimonial-card:hover { background: rgba(255,255,255,0.07) !important; box-shadow: none !important; }
         .testimonial-card::before { display: none !important; }
         .testimonial-text { color: rgba(255,255,255,0.7) !important; }
         .testimonial-name { color: rgba(255,255,255,0.9) !important; }
-        .testimonial-role { color: rgba(255,255,255,0.38) !important; }
-        .testimonial-nav {
-            background: rgba(255,255,255,0.06) !important;
-            border-color: rgba(255,255,255,0.1) !important;
-            color: rgba(255,255,255,0.7) !important;
-        }
-        .testimonial-nav:hover { background: rgba(255,90,44,0.2) !important; border-color: var(--v2-coral) !important; }
+        .testimonial-role { color: rgba(255,255,255,0.35) !important; }
+        .testimonial-nav { background: rgba(255,255,255,0.05) !important; border-color: rgba(255,255,255,0.1) !important; color: rgba(255,255,255,0.7) !important; }
+        .testimonial-nav:hover { background: rgba(255,90,44,0.15) !important; border-color: var(--v2-coral) !important; }
 
-        /* --- Ressources --- */
-        .section[id="ressources"] { background: #071020 !important; }
-        .section[id="ressources"] h2, .section[id="ressources"] h3 { color: rgba(255,255,255,0.9) !important; }
-        .section[id="ressources"] p, .section[id="ressources"] .section-subtitle { color: rgba(255,255,255,0.5) !important; }
-        .ressource-card, .resource-card {
-            background: rgba(255,255,255,0.04) !important;
-            border-color: rgba(255,255,255,0.08) !important;
-        }
+        /* ---- 12. RESOURCES ---- */
+        #ressources h4 { color: rgba(255,255,255,0.9) !important; }
+        #ressources p  { color: rgba(255,255,255,0.45) !important; }
+        #ressources .btn-primary { background: var(--v2-coral) !important; box-shadow: 0 0 24px rgba(255,90,44,0.25) !important; }
 
-        /* --- About --- */
-        .about { background: #04101f !important; }
-        .about h2, .about h3, .about .about-name { color: rgba(255,255,255,0.9) !important; }
-        .about p, .about .about-text { color: rgba(255,255,255,0.5) !important; }
-        .about .text-coral { color: var(--v2-coral) !important; }
-        .about-stat-number { color: var(--v2-coral) !important; }
-        .about-stat-label { color: rgba(255,255,255,0.4) !important; }
-        .about-credential { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.08) !important; color: rgba(255,255,255,0.65) !important; }
+        /* ---- 13. ABOUT ---- */
+        .about-name  { color: rgba(255,255,255,0.9) !important; }
+        .about-title { color: var(--v2-coral) !important; }
+        #a-propos .about-stat-number { color: var(--v2-coral) !important; }
+        #a-propos .about-text h3 { color: rgba(255,255,255,0.9) !important; }
+        #a-propos .about-text p  { color: rgba(255,255,255,0.5) !important; }
 
-        /* --- FAQ --- */
-        .faq { background: #030c1a !important; }
-        .faq h2 { color: rgba(255,255,255,0.9) !important; }
-        .faq .section-subtitle { color: rgba(255,255,255,0.5) !important; }
-        .faq-item {
-            background: rgba(255,255,255,0.04) !important;
-            border-color: rgba(255,255,255,0.07) !important;
-        }
+        /* ---- 14. FAQ ---- */
+        .faq-item { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.07) !important; }
         .faq-item:hover { background: rgba(255,255,255,0.06) !important; }
         .faq-question { color: rgba(255,255,255,0.85) !important; }
-        .faq-answer { color: rgba(255,255,255,0.5) !important; }
-        .faq-icon { color: var(--v2-coral) !important; }
+        .faq-answer-inner { color: rgba(255,255,255,0.5) !important; }
+        .faq h2, .faq .section-title { color: rgba(255,255,255,0.9) !important; }
 
-        /* --- Contact Form --- */
-        .lead-form-section { background: #071020 !important; }
-        .lead-form-section h2, .lead-form-section h3 { color: rgba(255,255,255,0.9) !important; }
-        .lead-form-section .section-subtitle, .lead-form-section p { color: rgba(255,255,255,0.5) !important; }
-        .lead-form-wrapper {
-            background: rgba(255,255,255,0.04) !important;
-            border-color: rgba(255,255,255,0.08) !important;
-            border-top-color: var(--v2-coral) !important;
-            box-shadow: none !important;
-        }
+        /* ---- 15. CONTACT FORM ---- */
+        .lead-form-wrapper { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.07) !important; border-top-color: var(--v2-coral) !important; box-shadow: none !important; }
         .lead-form-wrapper h3 { color: rgba(255,255,255,0.9) !important; }
-        .lead-form-wrapper .form-sub { color: rgba(255,255,255,0.45) !important; }
-        .form-group label { color: rgba(255,255,255,0.65) !important; }
-        .form-group input, .form-group select, .form-group textarea {
-            background: rgba(255,255,255,0.06) !important;
-            border-color: rgba(255,255,255,0.1) !important;
-            color: rgba(255,255,255,0.9) !important;
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: var(--v2-coral) !important;
-            background: rgba(255,255,255,0.08) !important;
-        }
-        .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25) !important; }
+        .lead-form-wrapper .form-sub { color: rgba(255,255,255,0.4) !important; }
+        .form-group label { color: rgba(255,255,255,0.6) !important; }
+        .form-group input, .form-group select, .form-group textarea { background: rgba(255,255,255,0.05) !important; border-color: rgba(255,255,255,0.1) !important; color: rgba(255,255,255,0.9) !important; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--v2-coral) !important; background: rgba(255,255,255,0.08) !important; }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.22) !important; }
         .form-group select option { background: #071020; color: rgba(255,255,255,0.9); }
+        #contact h2, #contact .section-title { color: rgba(255,255,255,0.9) !important; }
+        #contact .btn-primary { background: var(--v2-coral) !important; box-shadow: 0 0 32px rgba(255,90,44,0.3) !important; }
 
-        /* --- Final CTA V2 --- */
-        .cta-section {
-            background: #030c1a !important;
-            padding: 140px 0 !important;
-        }
-        .cta-section::before {
-            background: radial-gradient(circle, rgba(255,90,44,0.12), transparent 60%) !important;
-        }
-        .cta-section::after {
-            background: radial-gradient(circle, rgba(14,165,233,0.1), transparent 60%) !important;
-        }
-        .cta-section .stacked-title .line-1 { color: rgba(255,255,255,0.5) !important; opacity: 1 !important; }
-        .cta-section .stacked-title .line-2 { color: var(--v2-coral) !important; }
-        .cta-section .text-gold { color: var(--v2-teal) !important; }
+        /* ---- 16. FINAL CTA ---- */
+        .cta-section { background: #030c1a !important; padding: 140px 0 !important; }
+        .cta-section::before { background: radial-gradient(circle, rgba(255,90,44,0.12), transparent 60%) !important; }
+        .cta-section::after  { background: radial-gradient(circle, rgba(14,165,233,0.10), transparent 60%) !important; }
         .cta-section p { color: rgba(255,255,255,0.45) !important; }
-        .cta-section .btn-primary {
-            background: var(--v2-coral) !important;
-            box-shadow: 0 0 48px rgba(255,90,44,0.4), 0 4px 16px rgba(255,90,44,0.25) !important;
-        }
-        .cta-section .btn-primary:hover {
-            box-shadow: 0 0 64px rgba(255,90,44,0.55), 0 8px 24px rgba(255,90,44,0.35) !important;
-        }
-        .cta-section .btn-secondary {
-            border-color: rgba(255,255,255,0.2) !important;
-        }
-        /* Bottom gradient line on CTA */
-        .cta-section > div[style*="bottom:0"] {
-            background: linear-gradient(90deg,var(--v2-coral),var(--v2-blue),var(--v2-teal),var(--v2-coral)) !important;
-        }
+        .cta-section .text-gold { color: var(--v2-teal) !important; }
+        .cta-section .btn-primary { background: var(--v2-coral) !important; box-shadow: 0 0 48px rgba(255,90,44,0.4), 0 4px 16px rgba(255,90,44,0.25) !important; }
+        .cta-section .btn-primary:hover { box-shadow: 0 0 64px rgba(255,90,44,0.55), 0 8px 24px rgba(255,90,44,0.35) !important; }
+        .cta-section .btn-secondary { border-color: rgba(255,255,255,0.2) !important; }
 
-        /* --- Footer --- */
+        /* ---- 17. FOOTER ---- */
         .footer { background: #020810 !important; }
-        .footer-brand p, .footer-col a { color: rgba(255,255,255,0.4) !important; }
+        .footer-brand p { color: rgba(255,255,255,0.35) !important; }
+        .footer-col h4  { color: rgba(255,255,255,0.75) !important; }
+        .footer-col a   { color: rgba(255,255,255,0.38) !important; }
         .footer-col a:hover { color: var(--v2-coral) !important; }
         .footer-social a { border-color: rgba(255,255,255,0.08) !important; color: rgba(255,255,255,0.4) !important; }
         .footer-social a:hover { border-color: var(--v2-coral) !important; color: var(--v2-coral) !important; background: rgba(255,90,44,0.08) !important; }
         .footer-bottom { border-top-color: rgba(255,255,255,0.05) !important; color: rgba(255,255,255,0.2) !important; }
+        .footer-legal a { color: rgba(255,255,255,0.2) !important; }
+        .footer-legal a:hover { color: var(--v2-coral) !important; }
 
-        /* --- Wave dividers → invisible on dark-to-dark --- */
-        .wave-divider { display: none !important; }
-
-        /* --- Section transitions (smooth dark-to-dark) --- */
-        .section-light { background: #071020 !important; }
-        .section-dark { background: #030c1a !important; }
-
-        /* --- Floating CTA button --- */
-        .floating-cta-btn {
-            background: var(--v2-coral) !important;
-            box-shadow: 0 0 28px rgba(255,90,44,0.35) !important;
-        }
-
-        /* --- Scroll progress bar --- */
+        /* ---- 18. UI CHROME ---- */
         .scroll-progress { background: linear-gradient(90deg, var(--v2-coral), var(--v2-blue)) !important; }
-
-        /* --- Mobile sticky bar --- */
-        .mobile-sticky-bar { background: #030c1a !important; border-top-color: rgba(255,255,255,0.06) !important; }
+        .floating-cta-btn { background: var(--v2-coral) !important; box-shadow: 0 0 28px rgba(255,90,44,0.35) !important; }
+        .mobile-sticky-bar { background: rgba(3,12,26,0.97) !important; border-top-color: rgba(255,255,255,0.06) !important; }
         .mobile-sticky-bar .btn { background: var(--v2-coral) !important; }
+        .exit-popup { background: #071020 !important; border-color: rgba(255,255,255,0.08) !important; }
+        .cookie-banner { background: #071020 !important; border-top-color: rgba(255,255,255,0.06) !important; }
+
 
     </style>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">

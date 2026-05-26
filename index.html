@@ -577,22 +577,22 @@
         /* Portrait grand dans le hero */
         .hero-portrait-ring {
             grid-column: 1 / -1;
-            width: 200px; height: 200px; border-radius: 50%;
+            width: 280px; height: 280px; border-radius: 50%;
             border: 3px solid rgba(255,90,44,0.35);
             display: flex; align-items: center; justify-content: center;
             z-index: 2;
-            box-shadow: 0 0 40px rgba(255,90,44,0.2), 0 0 80px rgba(255,90,44,0.08);
-            margin: 0 auto 8px;
+            box-shadow: 0 0 50px rgba(255,90,44,0.25), 0 0 100px rgba(255,90,44,0.1);
+            margin: 0 auto 12px;
             position: relative;
             overflow: hidden;
         }
         .hero-portrait-ring::before {
-            content: ''; position: absolute; inset: -3px;
+            content: ''; position: absolute; inset: -4px;
             border-radius: 50%;
             background: conic-gradient(from 0deg, var(--v2-coral), var(--v2-blue), var(--v2-teal), var(--v2-coral));
             z-index: -1;
             animation: spinSlow 12s linear infinite;
-            opacity: 0.5;
+            opacity: 0.6;
         }
         .hero-portrait-ring img {
             width: 100%; height: 100%; border-radius: 50%;
@@ -2570,10 +2570,10 @@
             border-bottom: 1px solid rgba(255,255,255,0.04) !important;
         }
         .logo-carousel-label { color: rgba(255,255,255,0.2) !important; }
-        .logo-item img { filter: brightness(0) invert(1); opacity: 0.55; transition: opacity 0.3s; }
-        .logo-item:hover img { opacity: 0.6; }
-        .logo-item { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.07) !important; opacity: 1 !important; }
-        .logo-item:hover { background: rgba(255,255,255,0.08) !important; border-color: rgba(255,255,255,0.14) !important; box-shadow: none !important; }
+        .logo-item img { filter: grayscale(1) brightness(1.8) contrast(0.8); opacity: 0.6; transition: all 0.3s; }
+        .logo-item:hover img { filter: grayscale(0) brightness(1) contrast(1); opacity: 1; }
+        .logo-item { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.07) !important; opacity: 1 !important; filter: none !important; }
+        .logo-item:hover { background: rgba(255,255,255,0.08) !important; border-color: rgba(255,255,255,0.14) !important; box-shadow: none !important; filter: none !important; }
 
         /* ---- 7. PROBLEMS ---- */
         .problem-card {
@@ -2722,17 +2722,9 @@
             }
         }
 
-        /* ---- 16d. HERO METRIC CARDS — entry animation ---- */
+        /* ---- 16d. HERO METRIC CARDS — visible + float ---- */
         .hero-metric-card {
-            opacity: 0;
-            transform: translateY(20px);
-            animation-fill-mode: forwards !important;
-        }
-        .hero-metric-card.coral { animation: metricReveal 0.7s cubic-bezier(0.22,1,0.36,1) 0.6s forwards; }
-        .hero-metric-card.blue  { animation: metricReveal 0.7s cubic-bezier(0.22,1,0.36,1) 0.85s forwards; }
-        .hero-metric-card.teal  { animation: metricReveal 0.7s cubic-bezier(0.22,1,0.36,1) 1.1s forwards; }
-        @keyframes metricReveal {
-            to { opacity: 1; transform: translateY(0); }
+            opacity: 1;
         }
 
 
@@ -2955,7 +2947,6 @@
 
             </div>
         </div>
-scroll
         </div>
     </section>
 

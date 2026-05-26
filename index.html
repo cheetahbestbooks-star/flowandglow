@@ -2570,8 +2570,8 @@
             border-bottom: 1px solid rgba(255,255,255,0.04) !important;
         }
         .logo-carousel-label { color: rgba(255,255,255,0.2) !important; }
-        .logo-item img { filter: grayscale(1) brightness(1.8) contrast(0.8); opacity: 0.6; transition: all 0.3s; }
-        .logo-item:hover img { filter: grayscale(0) brightness(1) contrast(1); opacity: 1; }
+        .logo-item img { filter: none; opacity: 0.75; transition: all 0.3s; }
+        .logo-item:hover img { filter: none; opacity: 1; }
         .logo-item { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.07) !important; opacity: 1 !important; filter: none !important; }
         .logo-item:hover { background: rgba(255,255,255,0.08) !important; border-color: rgba(255,255,255,0.14) !important; box-shadow: none !important; filter: none !important; }
 
@@ -2659,7 +2659,10 @@
         #resultats div[style*="color:var(--teal)"]  { color: var(--v2-teal) !important; }
 
         /* ---- 11. TESTIMONIALS ---- */
-        .testimonial-card { background: rgba(255,255,255,0.04) !important; border: 1px solid rgba(255,255,255,0.07) !important; border-bottom: 3px solid var(--v2-coral) !important; box-shadow: none !important; }
+        .testimonials { display: block !important; visibility: visible !important; opacity: 1 !important; }
+        .testimonial-grid { opacity: 1 !important; visibility: visible !important; }
+        .testimonial-card { background: rgba(255,255,255,0.04) !important; border: 1px solid rgba(255,255,255,0.07) !important; border-bottom: 3px solid var(--v2-coral) !important; box-shadow: none !important; opacity: 1 !important; transform: none !important; visibility: visible !important; }
+        .testimonial-card.reveal { opacity: 1 !important; transform: none !important; }
         .testimonial-card:nth-child(2) { border-bottom-color: var(--v2-blue) !important; }
         .testimonial-card:nth-child(3) { border-bottom-color: var(--v2-teal) !important; }
         .testimonial-card:nth-child(4) { border-bottom-color: rgba(255,90,44,0.4) !important; }
@@ -2769,15 +2772,28 @@
         }
 
 
-        /* Footer social PNG icons — no filter */
+        /* Footer social PNG icons — blended into circles */
+        .footer-social a {
+            width: 38px !important; height: 38px !important;
+            background: rgba(255,255,255,0.05) !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            backdrop-filter: blur(4px);
+        }
+        .footer-social a:hover {
+            background: rgba(255,90,44,0.12) !important;
+            border-color: rgba(255,90,44,0.3) !important;
+            box-shadow: 0 0 16px rgba(255,90,44,0.15);
+        }
         .footer-social a img {
-            width: 16px;
-            height: 16px;
-            opacity: 0.5;
-            transition: opacity 0.3s;
+            width: 18px !important;
+            height: 18px !important;
+            opacity: 0.55;
+            filter: brightness(1.6);
+            transition: all 0.3s ease;
         }
         .footer-social a:hover img {
             opacity: 1;
+            filter: brightness(1);
         }
         /* ---- 17. FOOTER ---- */
         .footer { background: #020810 !important; }

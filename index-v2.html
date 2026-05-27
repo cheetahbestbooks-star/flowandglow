@@ -228,7 +228,7 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
         .container-narrow { max-width: 800px; margin: 0 auto; padding: 0 24px; }
 
-        .section { padding: 100px 0; }
+        .section { padding: 72px 0; }
         .section-dark { background: var(--gradient-hero); color: var(--white); }
         .section-light { background: var(--off-white); }
 
@@ -795,7 +795,8 @@
             animation: scrollLogos 20s linear infinite;
             width: max-content;
         }
-        .logo-track:hover { animation-play-state: paused; }
+        @media (hover: hover) { .logo-track:hover { animation-play-state: paused; } }
+        .logo-track { will-change: transform; }
         @keyframes scrollLogos {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -1523,15 +1524,18 @@
         }
         .footer-col a:hover { color: var(--coral); }
         .footer-social {
-            display: flex; gap: 12px; margin-top: 16px;
+            display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;
         }
         .footer-social a {
-            width: 36px; height: 36px; border-radius: 50%;
-            background: rgba(255,255,255,0.08); display: flex;
+            width: 44px; height: 44px; border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06); display: flex;
             align-items: center; justify-content: center;
-            transition: all 0.2s;
+            color: rgba(255,255,255,0.65);
+            transition: all 0.25s; text-decoration: none;
         }
-        .footer-social a:hover { background: var(--coral); color: white; }
+        .footer-social a svg, .footer-social a i { width: 20px; height: 20px; }
+        .footer-social a:hover { background: var(--coral); border-color: var(--coral); color: white; transform: translateY(-2px); }
         .footer-bottom {
             border-top: 1px solid rgba(255,255,255,0.08);
             padding-top: 24px; display: flex; justify-content: space-between;
@@ -1603,7 +1607,7 @@
            ============================================ */
         @media (max-width: 640px) {
             .container { padding: 0 16px; }
-            .section { padding: 56px 0; }
+            .section { padding: 44px 0; }
 
             /* Header */
             .header { padding: 12px 0; }
@@ -1820,8 +1824,6 @@
             /* Wave dividers plus petits */
             .wave-divider { height: 40px !important; }
 
-            /* Body padding pour la barre sticky */
-            body { padding-bottom: 72px; }
         }
 
         /* ============================================
@@ -2781,8 +2783,14 @@
         .footer-col h4  { color: rgba(255,255,255,0.75) !important; }
         .footer-col a   { color: rgba(255,255,255,0.38) !important; }
         .footer-col a:hover { color: var(--v2-coral) !important; }
-        .footer-social a { border-color: rgba(255,255,255,0.08) !important; color: rgba(255,255,255,0.4) !important; }
-        .footer-social a:hover { border-color: var(--v2-coral) !important; color: var(--v2-coral) !important; background: rgba(255,90,44,0.08) !important; }
+        .footer-social a {
+            width: 44px !important; height: 44px !important;
+            border: 2px solid rgba(255,255,255,0.18) !important;
+            background: rgba(255,255,255,0.06) !important;
+            color: rgba(255,255,255,0.65) !important;
+        }
+        .footer-social a svg, .footer-social a i { width: 20px !important; height: 20px !important; }
+        .footer-social a:hover { border-color: var(--v2-coral) !important; color: var(--v2-coral) !important; background: rgba(255,90,44,0.12) !important; }
         .footer-bottom { border-top-color: rgba(255,255,255,0.05) !important; color: rgba(255,255,255,0.2) !important; }
         .footer-legal a { color: rgba(255,255,255,0.2) !important; }
         .footer-legal a:hover { color: var(--v2-coral) !important; }
@@ -2790,11 +2798,29 @@
         /* ---- 18. UI CHROME ---- */
         .scroll-progress { background: linear-gradient(90deg, var(--v2-coral), var(--v2-blue)) !important; }
         .floating-cta-btn { background: var(--v2-coral) !important; box-shadow: 0 0 28px rgba(255,90,44,0.35) !important; }
-        .mobile-sticky-bar { background: rgba(3,12,26,0.97) !important; border-top-color: rgba(255,255,255,0.06) !important; }
-        .mobile-sticky-bar .btn { background: var(--v2-coral) !important; }
+        .mobile-sticky-bar { display: none !important; }
         .exit-popup { background: #071020 !important; border-color: rgba(255,255,255,0.08) !important; }
         .cookie-banner { background: #071020 !important; border-top-color: rgba(255,255,255,0.06) !important; }
 
+        /* ---- 19. SCROLL MARGIN — sections bien positionnées sous le nav ---- */
+        section[id], div[id].trust-bar, div[id] { scroll-margin-top: 80px; }
+
+        /* ---- 20. ABOUT — layout mobile ---- */
+        @media (max-width: 968px) {
+            .about-image { padding: 24px 16px !important; }
+            .about-photo-wrapper { width: 220px !important; height: 270px !important; }
+        }
+        @media (max-width: 640px) {
+            .about-image { padding: 16px 12px !important; margin-bottom: 12px !important; }
+            .about-photo-wrapper { width: 180px !important; height: 220px !important; }
+            .about-photo-bg { filter: blur(12px) !important; }
+            .about-grid { gap: 24px !important; }
+            .about-text { word-break: break-word; overflow-wrap: break-word; padding: 0 4px; }
+            .about-text h3 { font-size: 1.05rem !important; }
+        }
+
+        /* ---- 21. LOGO CAROUSEL — min-width pour éviter collapse si SVG absent ---- */
+        .logo-item { min-width: 80px; }
 
     </style>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
@@ -4018,16 +4044,16 @@
                     <p>Marketing digital & acquisition de leads pour PME locales et marques e-commerce. France & Suisse romande.</p>
                     <div class="footer-social">
                         <a href="https://www.linkedin.com/in/ayke-solutions-i-marketing-digital-i-automatisation-ia-055084390/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                            <i data-lucide="linkedin" style="width:16px;height:16px"></i>
+                            <i data-lucide="linkedin"></i>
                         </a>
                         <a href="https://facebook.com/aykesolutions" target="_blank" rel="noopener" aria-label="Facebook">
-                            <i data-lucide="facebook" style="width:16px;height:16px"></i>
+                            <i data-lucide="facebook"></i>
                         </a>
                         <a href="https://instagram.com/ayke.solutions" target="_blank" rel="noopener" aria-label="Instagram">
-                            <i data-lucide="instagram" style="width:16px;height:16px"></i>
+                            <i data-lucide="instagram"></i>
                         </a>
                         <a href="https://tiktok.com/@ayke.solutions" target="_blank" rel="noopener" aria-label="TikTok">
-                            <svg style="width:16px;height:16px" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V9.11a8.16 8.16 0 003.76.92V6.69z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V9.11a8.16 8.16 0 003.76.92V6.69z"/></svg>
                         </a>
                     </div>
                 </div>
@@ -4323,7 +4349,7 @@
 
         function showNotification(msg) {
             const notif = document.createElement('div');
-            notif.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1a2744;color:white;padding:16px 28px;border-radius:12px;font-size:0.9rem;box-shadow:0 8px 32px rgba(0,0,0,0.2);z-index:3000;animation:popupIn 0.3s ease';
+            notif.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#1a2744;color:white;padding:16px 28px;border-radius:12px;font-size:0.9rem;box-shadow:0 8px 32px rgba(0,0,0,0.2);z-index:3000;animation:popupIn 0.3s ease';
             notif.textContent = msg;
             document.body.appendChild(notif);
             setTimeout(() => notif.remove(), 4000);
@@ -4344,18 +4370,7 @@
             document.getElementById('cookieBanner').classList.remove('active');
         }
 
-        // ===== SMOOTH SCROLL for anchors =====
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offset = 80;
-                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
-                    window.scrollTo({ top, behavior: 'smooth' });
-                }
-            });
-        });
+        // ===== SMOOTH SCROLL for anchors (first handler — removed, see below) =====
 
         // ===== ANIMATED COUNTERS =====
         const counterObserver = new IntersectionObserver((entries) => {
@@ -4430,16 +4445,19 @@
         }
         window.addEventListener('scroll', updateActiveNav);
 
-        // ===== SMOOTH ANCHOR SCROLL with offset =====
+        // ===== SMOOTH ANCHOR SCROLL with dynamic nav offset =====
+        function getNavOffset() {
+            return (document.querySelector('.header')?.offsetHeight || 72) + 8;
+        }
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
+                const href = this.getAttribute('href');
+                if (!href || href === '#') return;
+                const target = document.querySelector(href);
                 if (target) {
                     e.preventDefault();
-                    const offset = 80;
-                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                    const top = target.getBoundingClientRect().top + window.scrollY - getNavOffset();
                     window.scrollTo({ top: top, behavior: 'smooth' });
-                    // Close mobile menu if open
                     const mobileMenu = document.querySelector('.mobile-menu');
                     if (mobileMenu) mobileMenu.classList.remove('active');
                 }
@@ -4571,17 +4589,6 @@
 
     </script>
 
-    <!-- ===== BARRE STICKY MOBILE ===== -->
-    <div class="mobile-sticky-bar" id="mobileStickyBar">
-        <a href="mailto:contact@ayke-solutions.com" class="sticky-call">
-            <i data-lucide="mail" style="width:18px;height:18px"></i>
-            Email
-        </a>
-        <a href="#" onclick="openCalendly(event)" class="sticky-calendly">
-            <i data-lucide="calendar" style="width:18px;height:18px"></i>
-            Prendre RDV
-        </a>
-    </div>
 
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
